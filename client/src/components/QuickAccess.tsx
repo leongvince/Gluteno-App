@@ -54,13 +54,13 @@ const QuickAccess: React.FC = () => {
 
   return (
     <section className="px-4 mb-6">
-      <h3 className="font-medium text-gray-800 mb-3">Quick Access</h3>
+      <h3 className="font-medium text-gray-800 dark:text-white mb-3">Quick Access</h3>
       <div className="grid grid-cols-2 gap-3">
         {quickLinks.map((link, index) => (
           <Link key={index} href={link.path}>
-            <a className="quick-link-card bg-white rounded-lg border border-gray-200 p-3 flex flex-col items-center justify-center hover:border-primary transition duration-200">
+            <a className="quick-link-card bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3 flex flex-col items-center justify-center hover:border-primary transition duration-200">
               {link.icon}
-              <p className="text-sm font-medium text-center">{link.title}</p>
+              <p className="text-sm font-medium text-center dark:text-white">{link.title}</p>
             </a>
           </Link>
         ))}

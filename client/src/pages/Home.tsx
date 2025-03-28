@@ -78,44 +78,44 @@ const Home: React.FC = () => {
       
       {/* Recent Activity */}
       <section className="px-4 mb-6">
-        <h3 className="font-medium text-gray-800 mb-3">Recent Activity</h3>
+        <h3 className="font-medium text-gray-800 dark:text-white mb-3">Recent Activity</h3>
         
         {isLoading ? (
           <>
-            <div className="bg-white rounded-lg border border-gray-200 p-3 mb-3 animate-pulse">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3 mb-3 animate-pulse">
               <div className="flex items-start">
-                <div className="h-5 w-5 bg-gray-200 rounded-full mr-3"></div>
+                <div className="h-5 w-5 bg-gray-200 dark:bg-gray-700 rounded-full mr-3"></div>
                 <div className="flex-1">
-                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                  <div className="h-3 bg-gray-200 rounded w-1/4"></div>
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2"></div>
+                  <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/4"></div>
                 </div>
               </div>
             </div>
-            <div className="bg-white rounded-lg border border-gray-200 p-3 mb-3 animate-pulse">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3 mb-3 animate-pulse">
               <div className="flex items-start">
-                <div className="h-5 w-5 bg-gray-200 rounded-full mr-3"></div>
+                <div className="h-5 w-5 bg-gray-200 dark:bg-gray-700 rounded-full mr-3"></div>
                 <div className="flex-1">
-                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                  <div className="h-3 bg-gray-200 rounded w-1/4"></div>
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2"></div>
+                  <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/4"></div>
                 </div>
               </div>
             </div>
           </>
         ) : recentActivities && recentActivities.length > 0 ? (
           recentActivities.map((activity) => (
-            <div key={activity.id} className="bg-white rounded-lg border border-gray-200 p-3 mb-3">
+            <div key={activity.id} className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3 mb-3">
               <div className="flex items-start">
                 {getActivityIcon(activity.icon)}
                 <div>
-                  <p className="text-sm font-medium">{activity.title}</p>
-                  <p className="text-xs text-gray-500">{activity.timestamp}</p>
+                  <p className="text-sm font-medium dark:text-white">{activity.title}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-300">{activity.timestamp}</p>
                 </div>
               </div>
             </div>
           ))
         ) : (
-          <div className="bg-white rounded-lg border border-gray-200 p-4 text-center">
-            <p className="text-sm text-gray-500">No recent activity to display</p>
+          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
+            <p className="text-sm text-gray-500 dark:text-gray-300">No recent activity to display</p>
           </div>
         )}
       </section>
