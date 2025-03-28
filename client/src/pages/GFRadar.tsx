@@ -84,11 +84,11 @@ const GFRadar: React.FC = () => {
     switch (status) {
       case 'verified':
         return (
-          <span className="ml-1 text-xs bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100 px-1.5 py-0.5 rounded">Verified</span>
+          <span className="ml-1 text-xs font-bold bg-green-200 dark:bg-green-800 text-green-900 dark:text-green-50 px-2 py-0.5 rounded">Verified</span>
         );
       case 'check':
         return (
-          <span className="ml-1 text-xs bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-100 px-1.5 py-0.5 rounded">Check with staff</span>
+          <span className="ml-1 text-xs font-bold bg-yellow-200 dark:bg-yellow-800 text-yellow-900 dark:text-yellow-50 px-2 py-0.5 rounded">Check with staff</span>
         );
       default:
         return null;
@@ -615,17 +615,17 @@ const GFRadar: React.FC = () => {
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center">
-                    <h4 className="font-medium text-sm dark:text-white">{restaurant.name}</h4>
+                    <h4 className="font-semibold text-base dark:text-white">{restaurant.name}</h4>
                     {getStatusBadge(restaurant.status)}
                   </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-300">{restaurant.distance} • {restaurant.priceRange} • {restaurant.cuisine}</p>
+                  <p className="text-xs font-medium text-gray-600 dark:text-gray-100">{restaurant.distance} • {restaurant.priceRange} • {restaurant.cuisine}</p>
                   <div className="flex items-center mt-1">
                     <div className="flex">
                       {renderStars(restaurant.rating)}
                     </div>
-                    <span className="text-xs ml-1 text-gray-500 dark:text-gray-300">({restaurant.reviewCount})</span>
+                    <span className="text-xs ml-1 font-medium text-gray-600 dark:text-gray-100">({restaurant.reviewCount})</span>
                   </div>
-                  <div className="text-xs mt-1 text-green-600 dark:text-green-400">
+                  <div className="text-xs mt-1 text-green-600 dark:text-green-400 font-medium">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 inline-block mr-1" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
@@ -637,13 +637,13 @@ const GFRadar: React.FC = () => {
           ))
         ) : (
           <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
-            <p className="text-sm text-gray-500 dark:text-gray-300">No gluten-free restaurants found nearby.</p>
-            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Try adjusting your search or filters.</p>
+            <p className="text-sm font-medium text-gray-700 dark:text-gray-100">No gluten-free restaurants found nearby.</p>
+            <p className="text-xs font-medium text-gray-600 dark:text-gray-200 mt-1">Try adjusting your search or filters.</p>
           </div>
         )}
         
         {filteredRestaurants && filteredRestaurants.length > 0 && (
-          <button className="w-full py-2 text-primary dark:text-primary-foreground text-center text-sm font-medium">
+          <button className="w-full py-2 text-primary dark:text-primary-foreground bg-primary-50 dark:bg-primary-900 text-center text-sm font-semibold hover:bg-primary-100 dark:hover:bg-primary-800 rounded-md mt-2">
             Load More Results
           </button>
         )}

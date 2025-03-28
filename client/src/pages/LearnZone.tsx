@@ -180,14 +180,14 @@ const LearnZone: React.FC = () => {
         ) : (
           // Actual content
           topics?.map((topic) => (
-            <div key={topic.id} className="bg-white rounded-lg border border-gray-200 p-4 mb-4">
+            <div key={topic.id} className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 mb-4">
               <div className="flex items-start">
                 {getIcon(topic.icon)}
                 <div>
-                  <h3 className="font-medium">{topic.title}</h3>
-                  <p className="text-sm text-gray-600 mt-1">{topic.description}</p>
+                  <h3 className="font-semibold text-gray-900 dark:text-white">{topic.title}</h3>
+                  <p className="text-sm text-gray-700 dark:text-gray-100 mt-1">{topic.description}</p>
                   <button 
-                    className="mt-2 text-sm text-primary font-medium flex items-center"
+                    className="mt-2 text-sm text-primary dark:text-primary-400 font-semibold flex items-center hover:underline"
                     onClick={() => handleTopicClick(topic)}
                   >
                     {topic.actionLabel} 
@@ -203,12 +203,12 @@ const LearnZone: React.FC = () => {
         )}
         
         {/* Student Stories */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4 mb-4">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 mb-4">
           <div className="flex items-start">
             {getIcon('play_circle')}
             <div>
-              <h3 className="font-medium">Student Stories</h3>
-              <p className="text-sm text-gray-600 mt-1">Video testimonials from other students managing celiac.</p>
+              <h3 className="font-semibold text-gray-900 dark:text-white">Student Stories</h3>
+              <p className="text-sm text-gray-700 dark:text-gray-100 mt-1">Video testimonials from other students managing celiac.</p>
               <div className="mt-2 grid grid-cols-2 gap-2">
                 {videosLoading ? (
                   // Skeleton loading for videos
