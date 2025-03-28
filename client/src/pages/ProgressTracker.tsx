@@ -184,7 +184,7 @@ const ProgressTracker: React.FC = () => {
       
       {/* Weekly Summary */}
       <section className="px-4 py-4 bg-indigo-50 border-b border-indigo-100">
-        <h3 className="font-medium text-gray-800 mb-2">Weekly Summary</h3>
+        <h3 className="font-semibold text-gray-900 mb-2 text-lg">Weekly Summary</h3>
         {isWeeklySummaryLoading ? (
           <div className="bg-white rounded-lg p-4 shadow-sm animate-pulse">
             <div className="h-4 bg-gray-200 rounded-full mb-3 mx-auto w-3/4"></div>
@@ -201,7 +201,7 @@ const ProgressTracker: React.FC = () => {
           </div>
         ) : (
           <div className="bg-white rounded-lg p-4 shadow-sm">
-            <p className="text-center text-sm mb-3">
+            <p className="text-center text-sm mb-3 text-gray-900 font-semibold">
               You went GF {weeklySummary?.daysGlutenFree}/{weeklySummary?.totalDays} days this week
             </p>
             <div className="h-2 bg-gray-200 rounded-full mb-3">
@@ -210,7 +210,7 @@ const ProgressTracker: React.FC = () => {
                 style={{ width: `${weeklySummary?.percentage || 0}%` }}
               ></div>
             </div>
-            <p className="text-center text-primary font-medium">You're doing great!</p>
+            <p className="text-center text-primary font-semibold">You're doing great!</p>
             
             <div className="grid grid-cols-7 gap-1 mt-4">
               {weeklySummary?.weekDays.map((day, index) => (
@@ -227,7 +227,7 @@ const ProgressTracker: React.FC = () => {
                       </svg>
                     )}
                   </div>
-                  <p className="text-xs mt-1">{day.dayInitial}</p>
+                  <p className="text-xs mt-1 text-gray-800 font-medium">{day.dayInitial}</p>
                 </div>
               ))}
             </div>
@@ -237,11 +237,11 @@ const ProgressTracker: React.FC = () => {
       
       {/* Today's Tracker */}
       <section className="px-4 py-4">
-        <h3 className="font-medium text-gray-800 mb-3">Today's Log</h3>
+        <h3 className="font-semibold text-gray-900 mb-3 text-lg">Today's Log</h3>
         
         {/* Mood Tracker */}
         <div className="bg-white rounded-lg border border-gray-200 p-4 mb-4">
-          <h4 className="text-sm font-medium mb-3">How are you feeling today?</h4>
+          <h4 className="text-md font-semibold mb-3 text-gray-900">How are you feeling today?</h4>
           <div className="flex justify-between items-center">
             {moodOptions.map((mood) => (
               <button 
@@ -249,10 +249,10 @@ const ProgressTracker: React.FC = () => {
                 className="flex flex-col items-center"
                 onClick={() => setCurrentMood(mood.value)}
               >
-                <div className={`w-10 h-10 rounded-full ${currentMood === mood.value ? 'bg-primary text-white' : 'bg-gray-100 text-gray-400'} flex items-center justify-center`}>
+                <div className={`w-10 h-10 rounded-full ${currentMood === mood.value ? 'bg-primary text-white' : 'bg-gray-200 text-gray-700'} flex items-center justify-center`}>
                   {mood.icon}
                 </div>
-                <span className={`text-xs mt-1 ${currentMood === mood.value ? 'text-primary' : ''}`}>{mood.label}</span>
+                <span className={`text-xs mt-1 font-medium ${currentMood === mood.value ? 'text-primary' : 'text-gray-800'}`}>{mood.label}</span>
               </button>
             ))}
           </div>
@@ -260,19 +260,19 @@ const ProgressTracker: React.FC = () => {
         
         {/* Symptoms Tracker */}
         <div className="bg-white rounded-lg border border-gray-200 p-4 mb-4">
-          <h4 className="text-sm font-medium mb-3">Symptoms</h4>
+          <h4 className="text-md font-semibold mb-3 text-gray-900">Symptoms</h4>
           <div className="grid grid-cols-2 gap-2">
             {symptoms.map((symptom) => (
               <button 
                 key={symptom}
-                className={`border ${selectedSymptoms.includes(symptom) ? 'border-primary bg-indigo-50 text-primary' : 'border-gray-200 text-gray-700'} rounded-lg p-2 text-sm text-left`}
+                className={`border ${selectedSymptoms.includes(symptom) ? 'border-primary bg-indigo-50 text-primary font-medium' : 'border-gray-200 text-gray-800 font-medium'} rounded-lg p-2 text-sm text-left`}
                 onClick={() => toggleSymptom(symptom)}
               >
                 {symptom}
               </button>
             ))}
             <button 
-              className="border border-gray-200 rounded-lg p-2 text-sm text-gray-700 text-left"
+              className="border border-gray-200 rounded-lg p-2 text-sm text-gray-800 font-medium text-left"
               onClick={() => toast({
                 title: "Add Symptom", 
                 description: "Custom symptom input would appear here"
@@ -285,7 +285,7 @@ const ProgressTracker: React.FC = () => {
         
         {/* GF Adherence */}
         <div className="bg-white rounded-lg border border-gray-200 p-4 mb-4">
-          <h4 className="text-sm font-medium mb-3">Gluten-Free Adherence</h4>
+          <h4 className="text-md font-semibold mb-3 text-gray-900">Gluten-Free Adherence</h4>
           <div className="space-y-2">
             <div className="flex items-center">
               <input 
@@ -295,7 +295,7 @@ const ProgressTracker: React.FC = () => {
                 checked={glutenFreeItems.breakfast}
                 onChange={() => toggleGlutenFree('breakfast')}
               />
-              <label htmlFor="breakfast-check" className="ml-2 text-sm text-gray-700">Breakfast was GF</label>
+              <label htmlFor="breakfast-check" className="ml-2 text-sm text-gray-800 font-medium">Breakfast was GF</label>
             </div>
             <div className="flex items-center">
               <input 
@@ -305,7 +305,7 @@ const ProgressTracker: React.FC = () => {
                 checked={glutenFreeItems.lunch}
                 onChange={() => toggleGlutenFree('lunch')}
               />
-              <label htmlFor="lunch-check" className="ml-2 text-sm text-gray-700">Lunch was GF</label>
+              <label htmlFor="lunch-check" className="ml-2 text-sm text-gray-800 font-medium">Lunch was GF</label>
             </div>
             <div className="flex items-center">
               <input 
@@ -315,7 +315,7 @@ const ProgressTracker: React.FC = () => {
                 checked={glutenFreeItems.dinner}
                 onChange={() => toggleGlutenFree('dinner')}
               />
-              <label htmlFor="dinner-check" className="ml-2 text-sm text-gray-700">Dinner was GF</label>
+              <label htmlFor="dinner-check" className="ml-2 text-sm text-gray-800 font-medium">Dinner was GF</label>
             </div>
             <div className="flex items-center">
               <input 
@@ -325,14 +325,14 @@ const ProgressTracker: React.FC = () => {
                 checked={glutenFreeItems.snacks}
                 onChange={() => toggleGlutenFree('snacks')}
               />
-              <label htmlFor="snack-check" className="ml-2 text-sm text-gray-700">Snacks were GF</label>
+              <label htmlFor="snack-check" className="ml-2 text-sm text-gray-800 font-medium">Snacks were GF</label>
             </div>
           </div>
         </div>
         
         {/* Journal Notes */}
         <div className="bg-white rounded-lg border border-gray-200 p-4 mb-4">
-          <h4 className="text-sm font-medium mb-2">Journal Notes</h4>
+          <h4 className="text-md font-semibold mb-2 text-gray-900">Journal Notes</h4>
           <textarea 
             className="w-full border border-gray-200 rounded-lg p-3 text-sm" 
             rows={3} 
