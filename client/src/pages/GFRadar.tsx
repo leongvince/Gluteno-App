@@ -32,12 +32,7 @@ const checkIcon = L.divIcon({
   iconAnchor: [12, 12],
 });
 
-const flaggedIcon = L.divIcon({
-  className: 'custom-pin pin-flagged',
-  html: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path></svg>',
-  iconSize: [24, 24],
-  iconAnchor: [12, 12],
-});
+
 
 // Center on Singapore NTU campus
 const DEFAULT_CENTER = [1.3483, 103.6831];
@@ -46,7 +41,7 @@ const DEFAULT_ZOOM = 15;
 interface Restaurant {
   id: number;
   name: string;
-  status: 'verified' | 'check' | 'flagged';
+  status: 'verified' | 'check';
   distance: string;
   priceRange: string;
   cuisine: string;
@@ -74,8 +69,6 @@ const GFRadar: React.FC = () => {
         return verifiedIcon;
       case 'check':
         return checkIcon;
-      case 'flagged':
-        return flaggedIcon;
       default:
         return defaultIcon;
     }
@@ -89,11 +82,7 @@ const GFRadar: React.FC = () => {
         );
       case 'check':
         return (
-          <span className="ml-1 text-xs bg-yellow-100 text-yellow-800 px-1.5 py-0.5 rounded">Check</span>
-        );
-      case 'flagged':
-        return (
-          <span className="ml-1 text-xs bg-red-100 text-red-800 px-1.5 py-0.5 rounded">Flagged</span>
+          <span className="ml-1 text-xs bg-yellow-100 text-yellow-800 px-1.5 py-0.5 rounded">Check with staff</span>
         );
       default:
         return null;
@@ -214,13 +203,9 @@ const GFRadar: React.FC = () => {
             <div className="w-3 h-3 rounded-full bg-green-500 mr-1"></div>
             <span>Verified GF</span>
           </div>
-          <div className="flex items-center mb-1">
+          <div className="flex items-center">
             <div className="w-3 h-3 rounded-full bg-yellow-500 mr-1"></div>
             <span>Check with staff</span>
-          </div>
-          <div className="flex items-center">
-            <div className="w-3 h-3 rounded-full bg-red-500 mr-1"></div>
-            <span>Flagged risk</span>
           </div>
         </div>
         

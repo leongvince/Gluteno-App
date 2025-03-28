@@ -1,8 +1,9 @@
 import { Restaurant } from '@/lib/mapUtils';
 
-// Data representing gluten-free restaurant options
+// Data representing gluten-free restaurant options across Singapore
 // This would typically come from an API but for this example, we'll use static data
 const gfLocations: Restaurant[] = [
+  // NTU Area
   {
     id: 1,
     name: "Green Earth Café",
@@ -47,14 +48,14 @@ const gfLocations: Restaurant[] = [
   },
   {
     id: 4,
-    name: "Heritage Rice",
-    status: "flagged",
+    name: "Nutri Bowl",
+    status: "verified",
     distance: "200m",
-    priceRange: "$",
-    cuisine: "Asian",
-    rating: 2,
-    reviewCount: 15,
-    gfOption: "High risk of cross-contamination",
+    priceRange: "$$",
+    cuisine: "Healthy Bowls",
+    rating: 4,
+    reviewCount: 38,
+    gfOption: "GF options clearly marked",
     image: "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
     lat: 1.3483 - 0.001,
     lng: 103.6831 + 0.001
@@ -114,6 +115,126 @@ const gfLocations: Restaurant[] = [
     image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
     lat: 1.3483 + 0.001,
     lng: 103.6831 + 0.001
+  },
+  
+  // Orchard Road Area
+  {
+    id: 9,
+    name: "Grain Traders",
+    status: "verified",
+    distance: "3.2km",
+    priceRange: "$$",
+    cuisine: "Bowls & Grains",
+    rating: 4.5,
+    reviewCount: 78,
+    gfOption: "Many GF options available",
+    image: "https://images.unsplash.com/photo-1543339494-b4cd4f7ba686?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.3041,
+    lng: 103.8316
+  },
+  {
+    id: 10,
+    name: "Real Food",
+    status: "verified",
+    distance: "3.5km",
+    priceRange: "$$",
+    cuisine: "Vegetarian/Vegan",
+    rating: 4.3,
+    reviewCount: 65,
+    gfOption: "GF options clearly labeled",
+    image: "https://images.unsplash.com/photo-1604480133435-25b86862d276?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.3022,
+    lng: 103.8368
+  },
+  
+  // Marina Bay Area
+  {
+    id: 11,
+    name: "SaladStop!",
+    status: "check",
+    distance: "5.1km",
+    priceRange: "$$",
+    cuisine: "Salads & Bowls",
+    rating: 4.2,
+    reviewCount: 92,
+    gfOption: "Ask for GF ingredients",
+    image: "https://images.unsplash.com/photo-1546793665-c74683f339c1?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.2819,
+    lng: 103.8585
+  },
+  {
+    id: 12,
+    name: "The Green Bar",
+    status: "verified",
+    distance: "5.3km",
+    priceRange: "$$$",
+    cuisine: "Healthy Cafe",
+    rating: 4.7,
+    reviewCount: 43,
+    gfOption: "Certified GF menu available",
+    image: "https://images.unsplash.com/photo-1601314002592-b8734bca6604?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.2834,
+    lng: 103.8607
+  },
+  
+  // East Coast Area
+  {
+    id: 13,
+    name: "Sarnies",
+    status: "check",
+    distance: "7.2km",
+    priceRange: "$$",
+    cuisine: "Cafe",
+    rating: 4.1,
+    reviewCount: 57,
+    gfOption: "GF bread available upon request",
+    image: "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.3113,
+    lng: 103.9385
+  },
+  {
+    id: 14,
+    name: "Kitchen by Food Rebel",
+    status: "verified",
+    distance: "7.5km",
+    priceRange: "$$",
+    cuisine: "Healthy Food",
+    rating: 4.4,
+    reviewCount: 68,
+    gfOption: "GF alternatives for most dishes",
+    image: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.3145,
+    lng: 103.9427
+  },
+  
+  // Bugis Area
+  {
+    id: 15,
+    name: "Super Loco",
+    status: "check",
+    distance: "4.6km",
+    priceRange: "$$",
+    cuisine: "Mexican",
+    rating: 4.3,
+    reviewCount: 104,
+    gfOption: "GF options available, ask staff",
+    image: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.2997,
+    lng: 103.8563
+  },
+  {
+    id: 16,
+    name: "The Living Cafe",
+    status: "verified",
+    distance: "6.8km",
+    priceRange: "$$$",
+    cuisine: "Raw Food",
+    rating: 4.6,
+    reviewCount: 72,
+    gfOption: "Most menu items are GF",
+    image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.2993,
+    lng: 103.8192
   }
 ];
 
