@@ -110,12 +110,12 @@ const Community: React.FC = () => {
       </div>
       
       {/* Community Rooms */}
-      <div className="px-4 py-3 bg-white border-b border-gray-200 overflow-x-auto">
+      <div className="px-4 py-3 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 overflow-x-auto">
         <div className="flex space-x-2 whitespace-nowrap">
           {rooms.map(room => (
             <button 
               key={room.id}
-              className={`px-3 py-1 text-sm ${activeRoom === room.id ? 'bg-primary text-white' : 'bg-gray-100'} rounded-full`}
+              className={`px-3 py-1 text-sm ${activeRoom === room.id ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'} rounded-full`}
               onClick={() => setActiveRoom(room.id)}
             >
               {room.name}
@@ -169,9 +169,9 @@ const Community: React.FC = () => {
           ))
         ) : posts && posts.length > 0 ? (
           posts.map(post => (
-            <div key={post.id} className="bg-white rounded-lg border border-gray-200 p-4 mb-4">
+            <div key={post.id} className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 mb-4">
               <div className="flex items-center mb-2">
-                <div className="w-8 h-8 bg-gray-200 rounded-full overflow-hidden">
+                <div className="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                   <img 
                     src={post.avatarUrl} 
                     alt="User avatar" 
@@ -182,37 +182,37 @@ const Community: React.FC = () => {
                   />
                 </div>
                 <div className="ml-2 flex-1">
-                  <p className="text-sm font-medium">{post.username}</p>
-                  <p className="text-xs text-gray-500">{formatPostDate(post.createdAt)}</p>
+                  <p className="text-sm font-medium dark:text-white">{post.username}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">{formatPostDate(post.createdAt)}</p>
                 </div>
                 {post.isVerifiedDietitian && (
-                  <span className="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded">Verified Dietitian</span>
+                  <span className="text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 px-1.5 py-0.5 rounded">Verified Dietitian</span>
                 )}
               </div>
-              <h3 className="font-medium mb-1">{post.title}</h3>
-              <p className="text-sm text-gray-600 mb-3">
+              <h3 className="font-medium mb-1 dark:text-white">{post.title}</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
                 {post.content}
               </p>
               <div className="flex justify-between items-center">
                 <div className="flex items-center">
                   <button 
-                    className="text-gray-500 p-1"
+                    className="text-gray-500 dark:text-gray-400 p-1"
                     onClick={() => handleUpvote(post.id)}
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
                     </svg>
                   </button>
-                  <span className="text-xs text-gray-500 mr-2">{post.upvotes}</span>
-                  <button className="text-gray-500 p-1">
+                  <span className="text-xs text-gray-500 dark:text-gray-400 mr-2">{post.upvotes}</span>
+                  <button className="text-gray-500 dark:text-gray-400 p-1">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                     </svg>
                   </button>
-                  <span className="text-xs text-gray-500">{post.replyCount}</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">{post.replyCount}</span>
                 </div>
                 <button 
-                  className="px-2 py-1 text-xs text-primary border border-primary rounded-lg"
+                  className="px-2 py-1 text-xs text-primary dark:text-primary-foreground border border-primary dark:border-primary-foreground rounded-lg"
                   onClick={() => handleReply(post.id)}
                 >
                   Reply

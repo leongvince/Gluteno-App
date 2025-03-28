@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { getGFLocations, DEFAULT_MAP_CENTER, DEFAULT_MAP_ZOOM } from '@/lib/mapUtils';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 // Fix Leaflet marker icon issue
 const defaultIcon = L.icon({
@@ -51,11 +52,16 @@ interface Restaurant {
   lng: number;
 }
 
+type SortOption = 'recommended' | 'rating' | 'distance' | 'deliveryTime';
+
 const GFRadar: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState('all');
   const [activeSubFilter, setActiveSubFilter] = useState('');
+  const [activeSortOption, setActiveSortOption] = useState<SortOption>('recommended');
   const [filteredRestaurants, setFilteredRestaurants] = useState<Restaurant[]>([]);
+  const [showPromo, setShowPromo] = useState(false);
+  const [activePriceFilter, setActivePriceFilter] = useState<string[]>([]);
   const mapRef = useRef<L.Map | null>(null);
 
   const { data: restaurants, isLoading } = useQuery({
@@ -133,6 +139,20 @@ const GFRadar: React.FC = () => {
       });
     }
     
+    // Apply price filters
+    if (activePriceFilter.length > 0) {
+      results = results.filter(restaurant => 
+        activePriceFilter.includes(restaurant.priceRange)
+      );
+    }
+    
+    // Apply promo filter
+    if (showPromo) {
+      // This would filter to only show restaurants with active promotions
+      // For demo, we'll just show random restaurants as having promos
+      results = results.filter((_, index) => index % 3 === 0);
+    }
+    
     // Apply sub-filters
     if (activeSubFilter) {
       switch (activeSubFilter) {
@@ -159,6 +179,32 @@ const GFRadar: React.FC = () => {
       }
     }
     
+    // Apply sort options
+    switch (activeSortOption) {
+      case 'recommended':
+        // For demo purposes, we'll just keep the default order
+        // In a real app, this would use a recommendation algorithm
+        break;
+      case 'rating':
+        results = [...results].sort((a, b) => b.rating - a.rating);
+        break;
+      case 'distance':
+        results = [...results].sort((a, b) => {
+          const distA = parseFloat(a.distance.replace('km', '').trim());
+          const distB = parseFloat(b.distance.replace('km', '').trim());
+          return distA - distB;
+        });
+        break;
+      case 'deliveryTime':
+        // For demo purposes, we'll simulate delivery time based on distance
+        results = [...results].sort((a, b) => {
+          const distA = parseFloat(a.distance.replace('km', '').trim());
+          const distB = parseFloat(b.distance.replace('km', '').trim());
+          return distA - distB;
+        });
+        break;
+    }
+    
     // Apply search query
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
@@ -169,7 +215,7 @@ const GFRadar: React.FC = () => {
     }
     
     setFilteredRestaurants(results);
-  }, [restaurants, activeFilter, activeSubFilter, searchQuery]);
+  }, [restaurants, activeFilter, activeSubFilter, activeSortOption, activePriceFilter, showPromo, searchQuery]);
 
   const renderStars = (rating: number) => {
     const stars = [];
@@ -265,6 +311,153 @@ const GFRadar: React.FC = () => {
       
       {/* Sub Filters */}
       <div className="px-4 py-2 flex space-x-2 overflow-x-auto bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+        <Dialog>
+          <DialogTrigger asChild>
+            <button className="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full whitespace-nowrap flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+              </svg>
+              Sort By
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>Sort By</DialogTitle>
+            </DialogHeader>
+            <div className="space-y-2 py-2">
+              <button 
+                className="flex items-center w-full px-3 py-3 text-left border-b border-gray-100 dark:border-gray-700"
+                onClick={() => {
+                  setActiveSortOption('recommended');
+                  const closeButton = document.querySelector('[data-close-dialog]') as HTMLButtonElement;
+                  if (closeButton) closeButton.click();
+                }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+                </svg>
+                <span>Recommended</span>
+                {activeSortOption === 'recommended' && (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-auto text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="16 12 12 8 8 12"></polyline>
+                    <line x1="12" y1="16" x2="12" y2="8"></line>
+                  </svg>
+                )}
+              </button>
+              <button 
+                className="flex items-center w-full px-3 py-3 text-left border-b border-gray-100 dark:border-gray-700"
+                onClick={() => {
+                  setActiveSortOption('rating');
+                  const closeButton = document.querySelector('[data-close-dialog]') as HTMLButtonElement;
+                  if (closeButton) closeButton.click();
+                }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+                <span>Rating</span>
+                {activeSortOption === 'rating' && (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-auto text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="16 12 12 8 8 12"></polyline>
+                    <line x1="12" y1="16" x2="12" y2="8"></line>
+                  </svg>
+                )}
+              </button>
+              <button 
+                className="flex items-center w-full px-3 py-3 text-left border-b border-gray-100 dark:border-gray-700"
+                onClick={() => {
+                  setActiveSortOption('distance');
+                  const closeButton = document.querySelector('[data-close-dialog]') as HTMLButtonElement;
+                  if (closeButton) closeButton.click();
+                }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Distance</span>
+                {activeSortOption === 'distance' && (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-auto text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="16 12 12 8 8 12"></polyline>
+                    <line x1="12" y1="16" x2="12" y2="8"></line>
+                  </svg>
+                )}
+              </button>
+              <button 
+                className="flex items-center w-full px-3 py-3 text-left"
+                onClick={() => {
+                  setActiveSortOption('deliveryTime');
+                  const closeButton = document.querySelector('[data-close-dialog]') as HTMLButtonElement;
+                  if (closeButton) closeButton.click();
+                }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <span>Delivery time</span>
+                {activeSortOption === 'deliveryTime' && (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-auto text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="16 12 12 8 8 12"></polyline>
+                    <line x1="12" y1="16" x2="12" y2="8"></line>
+                  </svg>
+                )}
+              </button>
+            </div>
+            
+            <div className="mt-3">
+              <h4 className="text-base font-medium mb-2">Restaurant options</h4>
+              <div className="flex items-center justify-between py-2 px-1">
+                <div className="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                    <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                  </svg>
+                  <span>Promo</span>
+                </div>
+                <input 
+                  type="checkbox" 
+                  className="toggle toggle-primary" 
+                  checked={showPromo}
+                  onChange={() => setShowPromo(!showPromo)}
+                />
+              </div>
+            </div>
+            
+            <div className="mt-3">
+              <h4 className="text-base font-medium mb-2">Price</h4>
+              <div className="flex items-center space-x-2">
+                {['$', '$$', '$$$', '$$$$'].map((price) => (
+                  <button
+                    key={price}
+                    className={`flex-1 py-2 px-4 rounded-full border ${
+                      activePriceFilter.includes(price)
+                        ? 'bg-primary text-white border-primary'
+                        : 'bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700'
+                    }`}
+                    onClick={() => {
+                      if (activePriceFilter.includes(price)) {
+                        setActivePriceFilter(activePriceFilter.filter(p => p !== price));
+                      } else {
+                        setActivePriceFilter([...activePriceFilter, price]);
+                      }
+                    }}
+                  >
+                    {price}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+        
         <button 
           className={`px-3 py-1 text-sm ${activeSubFilter === 'nearme' ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'} rounded-full whitespace-nowrap`}
           onClick={() => handleSubFilterClick('nearme')}
