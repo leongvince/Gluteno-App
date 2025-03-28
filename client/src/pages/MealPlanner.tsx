@@ -3,6 +3,8 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiRequest } from '@/lib/queryClient';
 import { format, addDays, subDays } from 'date-fns';
 import { useToast } from '@/hooks/use-toast';
+import SocialFeatures from '@/components/SocialFeatures';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface Recipe {
   id: number;
@@ -183,6 +185,9 @@ const MealPlanner: React.FC = () => {
     );
   };
 
+  // For sharing the current recipe we're viewing
+  const selectedRecipe = meals?.breakfast || meals?.lunch || meals?.dinner || meals?.snack;
+  
   return (
     <div className="pb-16">
       <div className="px-4 py-3 bg-primary text-white sticky top-0 z-10">
@@ -190,95 +195,121 @@ const MealPlanner: React.FC = () => {
         <p className="text-sm opacity-90">Simple, budget-friendly GF meals</p>
       </div>
       
-      {/* Day Selector */}
-      <div className="px-4 py-3 bg-white border-b border-gray-200">
-        <div className="flex justify-between items-center">
-          <button className="p-1" onClick={goToPreviousDay}>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-          </button>
-          <h3 className="font-medium">{formattedDate}</h3>
-          <button className="p-1" onClick={goToNextDay}>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-          </button>
+      <Tabs defaultValue="planner">
+        <div className="border-b">
+          <TabsList className="w-full flex">
+            <TabsTrigger value="planner" className="flex-1">Meal Planner</TabsTrigger>
+            <TabsTrigger value="social" className="flex-1">Social</TabsTrigger>
+          </TabsList>
         </div>
-      </div>
-      
-      {/* Meal Slots */}
-      <div className="px-4 py-4">
-        {isLoading ? (
-          // Skeleton loading state
-          Array(4).fill(null).map((_, index) => (
-            <div key={index} className="mb-6">
-              <div className="flex items-center justify-between mb-2">
-                <div className="h-5 bg-gray-200 rounded w-24"></div>
-                <div className="h-4 bg-gray-200 rounded w-16"></div>
-              </div>
-              <div className="bg-white rounded-lg border border-gray-200 p-3 animate-pulse">
-                <div className="flex">
-                  <div className="w-16 h-16 bg-gray-200 rounded-lg mr-3"></div>
-                  <div className="flex-1">
-                    <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                    <div className="h-3 bg-gray-200 rounded w-1/2 mb-2"></div>
-                    <div className="mt-2 flex">
-                      <div className="h-3 bg-gray-200 rounded w-16 mr-3"></div>
-                      <div className="h-3 bg-gray-200 rounded w-6"></div>
+        
+        <TabsContent value="planner">
+          {/* Day Selector */}
+          <div className="px-4 py-3 bg-white border-b border-gray-200">
+            <div className="flex justify-between items-center">
+              <button className="p-1" onClick={goToPreviousDay}>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <h3 className="font-medium">{formattedDate}</h3>
+              <button className="p-1" onClick={goToNextDay}>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+          
+          {/* Meal Slots */}
+          <div className="px-4 py-4">
+            {isLoading ? (
+              // Skeleton loading state
+              Array(4).fill(null).map((_, index) => (
+                <div key={index} className="mb-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="h-5 bg-gray-200 rounded w-24"></div>
+                    <div className="h-4 bg-gray-200 rounded w-16"></div>
+                  </div>
+                  <div className="bg-white rounded-lg border border-gray-200 p-3 animate-pulse">
+                    <div className="flex">
+                      <div className="w-16 h-16 bg-gray-200 rounded-lg mr-3"></div>
+                      <div className="flex-1">
+                        <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                        <div className="h-3 bg-gray-200 rounded w-1/2 mb-2"></div>
+                        <div className="mt-2 flex">
+                          <div className="h-3 bg-gray-200 rounded w-16 mr-3"></div>
+                          <div className="h-3 bg-gray-200 rounded w-6"></div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          ))
-        ) : (
-          <>
-            {/* Breakfast */}
-            <div className="mb-6">
-              <div className="flex items-center justify-between mb-2">
-                <h4 className="font-medium text-gray-800">Breakfast</h4>
-                <button className="text-sm text-primary" onClick={() => addMeal('breakfast')}>Add Meal</button>
-              </div>
-              {renderMealCard('breakfast', meals?.breakfast || null)}
-            </div>
+              ))
+            ) : (
+              <>
+                {/* Breakfast */}
+                <div className="mb-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="font-medium text-gray-800">Breakfast</h4>
+                    <button className="text-sm text-primary" onClick={() => addMeal('breakfast')}>Add Meal</button>
+                  </div>
+                  {renderMealCard('breakfast', meals?.breakfast || null)}
+                </div>
+                
+                {/* Lunch */}
+                <div className="mb-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="font-medium text-gray-800">Lunch</h4>
+                    <button className="text-sm text-primary" onClick={() => addMeal('lunch')}>Add Meal</button>
+                  </div>
+                  {renderMealCard('lunch', meals?.lunch || null)}
+                </div>
+                
+                {/* Dinner */}
+                <div className="mb-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="font-medium text-gray-800">Dinner</h4>
+                    <button className="text-sm text-primary" onClick={() => addMeal('dinner')}>Add Meal</button>
+                  </div>
+                  {renderMealCard('dinner', meals?.dinner || null)}
+                </div>
+                
+                {/* Snacks */}
+                <div className="mb-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="font-medium text-gray-800">Snacks</h4>
+                    <button className="text-sm text-primary" onClick={() => addMeal('snack')}>Add Snack</button>
+                  </div>
+                  {renderMealCard('snack', meals?.snack || null)}
+                </div>
+              </>
+            )}
             
-            {/* Lunch */}
-            <div className="mb-6">
-              <div className="flex items-center justify-between mb-2">
-                <h4 className="font-medium text-gray-800">Lunch</h4>
-                <button className="text-sm text-primary" onClick={() => addMeal('lunch')}>Add Meal</button>
-              </div>
-              {renderMealCard('lunch', meals?.lunch || null)}
-            </div>
-            
-            {/* Dinner */}
-            <div className="mb-6">
-              <div className="flex items-center justify-between mb-2">
-                <h4 className="font-medium text-gray-800">Dinner</h4>
-                <button className="text-sm text-primary" onClick={() => addMeal('dinner')}>Add Meal</button>
-              </div>
-              {renderMealCard('dinner', meals?.dinner || null)}
-            </div>
-            
-            {/* Snacks */}
-            <div className="mb-6">
-              <div className="flex items-center justify-between mb-2">
-                <h4 className="font-medium text-gray-800">Snacks</h4>
-                <button className="text-sm text-primary" onClick={() => addMeal('snack')}>Add Snack</button>
-              </div>
-              {renderMealCard('snack', meals?.snack || null)}
-            </div>
-          </>
-        )}
+            <button 
+              className="w-full py-3 bg-primary text-white rounded-lg font-medium"
+              onClick={generateWeeklyPlan}
+            >
+              Generate Weekly Meal Plan
+            </button>
+          </div>
+        </TabsContent>
         
-        <button 
-          className="w-full py-3 bg-primary text-white rounded-lg font-medium"
-          onClick={generateWeeklyPlan}
-        >
-          Generate Weekly Meal Plan
-        </button>
-      </div>
+        <TabsContent value="social" className="px-4">
+          <div className="pt-4">
+            <h3 className="text-lg font-semibold mb-2">Social Features</h3>
+            <p className="text-sm text-muted-foreground mb-4">
+              Connect with friends, share recipes, and discover new meal ideas from your network.
+            </p>
+            
+            <SocialFeatures 
+              recipeId={selectedRecipe?.id}
+              recipeName={selectedRecipe?.name}
+              recipeImage={selectedRecipe?.image}
+            />
+          </div>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };

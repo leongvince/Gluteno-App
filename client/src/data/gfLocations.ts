@@ -146,6 +146,34 @@ const gfLocations: Restaurant[] = [
     lat: 1.3022,
     lng: 103.8368
   },
+  {
+    id: 17,
+    name: "Gluten-Free Delights",
+    status: "verified",
+    distance: "3.7km",
+    priceRange: "$$",
+    cuisine: "Bakery",
+    rating: 4.8,
+    reviewCount: 93,
+    gfOption: "100% GF dedicated bakery",
+    image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.3035,
+    lng: 103.8345
+  },
+  {
+    id: 18,
+    name: "Celiac Safe Kitchen",
+    status: "verified",
+    distance: "4.0km",
+    priceRange: "$$$",
+    cuisine: "International",
+    rating: 4.9,
+    reviewCount: 106,
+    gfOption: "Certified gluten-free facility",
+    image: "https://images.unsplash.com/photo-1564759077036-3def472ffd3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.3010,
+    lng: 103.8320
+  },
   
   // Marina Bay Area
   {
@@ -175,6 +203,34 @@ const gfLocations: Restaurant[] = [
     image: "https://images.unsplash.com/photo-1601314002592-b8734bca6604?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
     lat: 1.2834,
     lng: 103.8607
+  },
+  {
+    id: 19,
+    name: "Bay Breeze Bowls",
+    status: "verified",
+    distance: "5.5km",
+    priceRange: "$$",
+    cuisine: "Açaí & Smoothie Bowls",
+    rating: 4.6,
+    reviewCount: 82,
+    gfOption: "All bowls are GF, dedicated prep area",
+    image: "https://images.unsplash.com/photo-1590301157890-8679078c4616?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.2840,
+    lng: 103.8570
+  },
+  {
+    id: 20,
+    name: "Marina's Gluten Haven",
+    status: "verified",
+    distance: "5.8km",
+    priceRange: "$$$",
+    cuisine: "Italian",
+    rating: 4.5,
+    reviewCount: 74,
+    gfOption: "GF pasta and pizza options",
+    image: "https://images.unsplash.com/photo-1595295333158-4742f28fbd85?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.2810,
+    lng: 103.8540
   },
   
   // East Coast Area
@@ -206,6 +262,34 @@ const gfLocations: Restaurant[] = [
     lat: 1.3145,
     lng: 103.9427
   },
+  {
+    id: 21,
+    name: "Coast Celiac Cafe",
+    status: "verified",
+    distance: "7.8km",
+    priceRange: "$$",
+    cuisine: "Brunch",
+    rating: 4.7,
+    reviewCount: 91,
+    gfOption: "Full GF menu with dedicated kitchen",
+    image: "https://images.unsplash.com/photo-1550304943-4f24f54ddde9?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.3160,
+    lng: 103.9450
+  },
+  {
+    id: 22,
+    name: "Seaside GF Grill",
+    status: "verified",
+    distance: "8.1km",
+    priceRange: "$$$",
+    cuisine: "Seafood",
+    rating: 4.8,
+    reviewCount: 64,
+    gfOption: "All grilled items GF, separate prep area",
+    image: "https://images.unsplash.com/photo-1513639776629-7b61b0ac49cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.3180,
+    lng: 103.9410
+  },
   
   // Bugis Area
   {
@@ -235,6 +319,94 @@ const gfLocations: Restaurant[] = [
     image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
     lat: 1.2993,
     lng: 103.8192
+  },
+  {
+    id: 23,
+    name: "Bugis Allergen-Free Zone",
+    status: "verified",
+    distance: "4.9km",
+    priceRange: "$$",
+    cuisine: "Asian Fusion",
+    rating: 4.5,
+    reviewCount: 87,
+    gfOption: "Allergen-free environment, 100% GF",
+    image: "https://images.unsplash.com/photo-1559314809-4d1972cf29f7?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.3005,
+    lng: 103.8550
+  },
+  {
+    id: 24,
+    name: "GF Street Food Market",
+    status: "verified",
+    distance: "5.2km",
+    priceRange: "$$",
+    cuisine: "Street Food",
+    rating: 4.4,
+    reviewCount: 76,
+    gfOption: "Multiple GF vendors in one location",
+    image: "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.3010,
+    lng: 103.8580
+  },
+  
+  // Jurong East Area
+  {
+    id: 25,
+    name: "Westside GF Bistro",
+    status: "verified",
+    distance: "4.5km",
+    priceRange: "$$",
+    cuisine: "Western",
+    rating: 4.3,
+    reviewCount: 68,
+    gfOption: "Separate GF menu with certification",
+    image: "https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.3330,
+    lng: 103.7420
+  },
+  {
+    id: 26,
+    name: "Jurong Celiac Sanctuary",
+    status: "verified",
+    distance: "4.8km",
+    priceRange: "$$$",
+    cuisine: "International",
+    rating: 4.7,
+    reviewCount: 59,
+    gfOption: "100% gluten-free facility",
+    image: "https://images.unsplash.com/photo-1600335895229-6e75511892c8?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.3350,
+    lng: 103.7380
+  },
+  
+  // Sentosa
+  {
+    id: 27,
+    name: "Island GF Retreat",
+    status: "verified",
+    distance: "10.2km",
+    priceRange: "$$$",
+    cuisine: "Mediterranean",
+    rating: 4.9,
+    reviewCount: 112,
+    gfOption: "Premium GF dining experience",
+    image: "https://images.unsplash.com/photo-1570696516188-ade861b84a49?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.2494,
+    lng: 103.8303
+  },
+  {
+    id: 28,
+    name: "Beach Celiac Bar",
+    status: "verified",
+    distance: "10.5km",
+    priceRange: "$$",
+    cuisine: "Tropical",
+    rating: 4.6,
+    reviewCount: 89,
+    gfOption: "GF cocktails and food menu",
+    image: "https://images.unsplash.com/photo-1536935338788-846bb9981813?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.2480,
+    lng: 103.8290
   }
 ];
 

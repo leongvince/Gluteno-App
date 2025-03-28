@@ -14,12 +14,12 @@ const BottomNavigation: React.FC<BottomNavigationProps> = ({ currentPath }) => {
 
   const getNavItemClass = (path: string) => {
     return `flex flex-col items-center p-1 w-1/5 ${
-      isActive(path) ? 'text-primary' : 'text-gray-500'
+      isActive(path) ? 'text-primary' : 'text-gray-500 dark:text-gray-400'
     }`;
   };
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-2 py-2 flex justify-around items-center z-10 max-w-md mx-auto">
+    <nav className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 px-2 py-2 flex justify-around items-center z-10 max-w-md mx-auto">
       <Link href="/">
         <a className={getNavItemClass('/')}>
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
