@@ -107,7 +107,7 @@ const Home: React.FC = () => {
               <div className="flex items-start">
                 {getActivityIcon(activity.icon)}
                 <div>
-                  <p className="text-sm font-medium dark:text-white">{activity.title}</p>
+                  <p className="text-sm font-medium text-gray-700 dark:text-white">{activity.title}</p>
                   <p className="text-xs text-gray-500 dark:text-gray-300">{activity.timestamp}</p>
                 </div>
               </div>

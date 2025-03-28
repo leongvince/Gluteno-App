@@ -96,8 +96,8 @@ const DailySummary: React.FC<DailySummaryProps> = ({ userId }) => {
           <div className="grid grid-cols-3 gap-2 text-center">
             <div className="bg-gray-50 dark:bg-gray-700 rounded p-2">
               {getMoodIcon(summaryData?.mood || 'okay')}
-              <p className="text-xs mt-1 dark:text-gray-300">Mood</p>
-              <p className="text-sm font-medium capitalize dark:text-white">{summaryData?.mood || 'Okay'}</p>
+              <p className="text-xs mt-1 text-gray-600 dark:text-gray-300">Mood</p>
+              <p className="text-sm font-medium capitalize text-gray-700 dark:text-white">{summaryData?.mood || 'Okay'}</p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-700 rounded p-2">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-500 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -107,15 +107,15 @@ const DailySummary: React.FC<DailySummaryProps> = ({ userId }) => {
                 <line x1="10" y1="1" x2="10" y2="4"></line>
                 <line x1="14" y1="1" x2="14" y2="4"></line>
               </svg>
-              <p className="text-xs mt-1 dark:text-gray-300">Meals</p>
-              <p className="text-sm font-medium dark:text-white">{summaryData?.mealCount || 0}/{summaryData?.totalMeals || 3} GF</p>
+              <p className="text-xs mt-1 text-gray-600 dark:text-gray-300">Meals</p>
+              <p className="text-sm font-medium text-gray-700 dark:text-white">{summaryData?.mealCount || 0}/{summaryData?.totalMeals || 3} GF</p>
             </div>
             <div className="bg-gray-50 dark:bg-gray-700 rounded p-2">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-red-500 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
               </svg>
-              <p className="text-xs mt-1 dark:text-gray-300">Symptoms</p>
-              <p className="text-sm font-medium capitalize dark:text-white">{summaryData?.symptomLevel || 'None'}</p>
+              <p className="text-xs mt-1 text-gray-600 dark:text-gray-300">Symptoms</p>
+              <p className="text-sm font-medium capitalize text-gray-700 dark:text-white">{summaryData?.symptomLevel || 'None'}</p>
             </div>
           </div>
         )}

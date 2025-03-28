@@ -60,7 +60,7 @@ const QuickAccess: React.FC = () => {
           <Link key={index} href={link.path}>
             <a className="quick-link-card bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3 flex flex-col items-center justify-center hover:border-primary transition duration-200">
               {link.icon}
-              <p className="text-sm font-medium text-center dark:text-white">{link.title}</p>
+              <p className="text-sm font-medium text-center text-gray-700 dark:text-white">{link.title}</p>
             </a>
           </Link>
         ))}
