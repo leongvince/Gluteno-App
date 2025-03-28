@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GlutenFree Campus - For College Students with Celiac Disease</title>
+  <meta name="description" content="A gluten-free lifestyle app for college students with celiac disease offering food location services, educational content, and health tracking" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Custom styles to fix map pins */
+    .map-pin {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: absolute;
+      transform: translate(-50%, -50%);
+    }
+    .pin-verified { background-color: #10B981; }
+    .pin-check { background-color: #F59E0B; }
+    .pin-flagged { background-color: #EF4444; }
+    
+    /* Custom leaflet marker icons */
+    .custom-pin {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+    .custom-pin.pin-verified {
+      background-color: #10B981;
+    }
+    .custom-pin.pin-check {
+      background-color: #F59E0B;
+    }
+    .custom-pin.pin-flagged {
+      background-color: #EF4444;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+</body>
+</html>
