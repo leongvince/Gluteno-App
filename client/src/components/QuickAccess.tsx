@@ -5,6 +5,7 @@ interface QuickLink {
   title: string;
   icon: JSX.Element;
   path: string;
+  onClick?: () => void;
 }
 
 const QuickAccess: React.FC = () => {
@@ -39,7 +40,11 @@ const QuickAccess: React.FC = () => {
           <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
         </svg>
       ),
-      path: "/community"
+      path: "/community",
+      onClick: () => {
+        // Store the meetup tab selection in localStorage
+        localStorage.setItem('communityTab', 'meetups');
+      }
     },
     {
       title: "Ask the Community",
@@ -57,7 +62,12 @@ const QuickAccess: React.FC = () => {
       <h3 className="font-medium text-gray-800 dark:text-white mb-3">Quick Access</h3>
       <div className="grid grid-cols-2 gap-3">
         {quickLinks.map((link, index) => (
-          <Link key={index} href={link.path} className="quick-link-card bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3 flex flex-col items-center justify-center hover:border-primary transition duration-200">
+          <Link 
+            key={index} 
+            href={link.path} 
+            onClick={link.onClick}
+            className="quick-link-card bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3 flex flex-col items-center justify-center hover:border-primary transition duration-200"
+          >
             <div>
               {link.icon}
               <p className="text-sm font-medium text-center text-gray-700 dark:text-white">{link.title}</p>

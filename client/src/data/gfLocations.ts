@@ -233,6 +233,78 @@ const gfLocations: Restaurant[] = [
     lng: 103.8540
   },
   
+  // Singapore Local Food Options
+  {
+    id: 34,
+    name: "Hawker Paradise",
+    status: "verified",
+    distance: "2.8km",
+    priceRange: "$",
+    cuisine: "Local Hawker Food",
+    rating: 4.7,
+    reviewCount: 124,
+    gfOption: "Dedicated GF stall with rice options",
+    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.3603,
+    lng: 103.9493
+  },
+  {
+    id: 35,
+    name: "Laksa Haven",
+    status: "verified",
+    distance: "3.1km",
+    priceRange: "$",
+    cuisine: "Local Singaporean",
+    rating: 4.8,
+    reviewCount: 156,
+    gfOption: "GF rice noodle laksa available",
+    image: "https://images.unsplash.com/photo-1569562211005-9e344a2536df?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.3752,
+    lng: 103.8123
+  },
+  {
+    id: 36,
+    name: "Chinatown GF Corner",
+    status: "verified",
+    distance: "4.3km",
+    priceRange: "$",
+    cuisine: "Chinese Local",
+    rating: 4.6,
+    reviewCount: 92,
+    gfOption: "Rice dishes and rice noodle options",
+    image: "https://images.unsplash.com/photo-1555126634-323283e090fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.2847,
+    lng: 103.8443
+  },
+  {
+    id: 37,
+    name: "Little India GF Spot",
+    status: "check",
+    distance: "5.0km",
+    priceRange: "$",
+    cuisine: "Indian Local",
+    rating: 4.4,
+    reviewCount: 77,
+    gfOption: "Ask for rice options - many naturally GF dishes",
+    image: "https://images.unsplash.com/photo-1585937421612-70a008356570?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.3064,
+    lng: 103.8522
+  },
+  {
+    id: 38,
+    name: "Malay Corner",
+    status: "verified",
+    distance: "3.7km",
+    priceRange: "$",
+    cuisine: "Malay Local",
+    rating: 4.9,
+    reviewCount: 118,
+    gfOption: "Certified GF rice dishes available",
+    image: "https://images.unsplash.com/photo-1563245220-f2c9e1d3b6a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.3185,
+    lng: 103.8942
+  },
+  
   // East Coast Area
   {
     id: 13,

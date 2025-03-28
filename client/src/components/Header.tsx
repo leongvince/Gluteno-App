@@ -7,7 +7,7 @@ const Header: React.FC = () => {
     <header className="px-4 py-3 bg-white dark:bg-gray-900 shadow-sm sticky top-0 z-10">
       <div className="flex items-center justify-between">
         <Link href="/">
-          <h1 className="text-xl font-semibold text-primary cursor-pointer dark:text-primary-foreground">GlutenFree Campus</h1>
+          <h1 className="text-xl font-semibold text-primary cursor-pointer dark:text-primary-foreground">Gluteno</h1>
         </Link>
         <div className="flex items-center space-x-1">
           <ThemeToggle className="mr-1" />

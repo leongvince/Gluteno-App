@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiRequest } from '@/lib/queryClient';
 import { useToast } from '@/hooks/use-toast';
 import { format, formatDistance } from 'date-fns';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 interface CommunityPost {
   id: number;
@@ -21,15 +22,61 @@ interface CommunityPost {
 
 const Community: React.FC = () => {
   const [activeRoom, setActiveRoom] = useState('all');
+  const [meetupDialogOpen, setMeetupDialogOpen] = useState(false);
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  
+  // Check localStorage for tab selection on component mount
+  useEffect(() => {
+    const tabFromStorage = localStorage.getItem('communityTab');
+    if (tabFromStorage) {
+      setActiveRoom(tabFromStorage);
+      // Clear the storage to avoid persisting this selection across page refreshes
+      localStorage.removeItem('communityTab');
+    }
+  }, []);
+  
+  // Meetup data
+  const upcomingMeetups = [
+    {
+      id: 1,
+      title: "Gluten-Free Baking Workshop",
+      date: "April 2, 2025",
+      time: "3:00 PM - 5:00 PM",
+      location: "Campus Kitchen (Building C)",
+      attendees: 12,
+      maxAttendees: 20,
+      host: "Singapore Celiac Support Group"
+    },
+    {
+      id: 2,
+      title: "Dining Out Safely - Restaurant Tour",
+      date: "April 8, 2025",
+      time: "6:30 PM - 8:30 PM",
+      location: "Meeting at South Gate",
+      attendees: 8,
+      maxAttendees: 15,
+      host: "GF Singapore"
+    },
+    {
+      id: 3,
+      title: "New Diagnosis Support Circle",
+      date: "April 15, 2025",
+      time: "4:00 PM - 5:30 PM",
+      location: "Student Center Room 204",
+      attendees: 5,
+      maxAttendees: 10,
+      host: "Campus Health Services"
+    }
+  ];
   
   const rooms = [
     { id: 'all', name: 'All Posts' },
     { id: 'newlyDiagnosed', name: 'Newly Diagnosed' },
     { id: 'gfRecipes', name: 'GF Recipes' },
     { id: 'budgetMeals', name: 'Budget Meals' },
-    { id: 'diningOut', name: 'Dining Out' }
+    { id: 'diningOut', name: 'Dining Out' },
+    { id: 'meetups', name: 'Meetups' }
   ];
   
   const { data: posts, isLoading } = useQuery({
@@ -126,22 +173,179 @@ const Community: React.FC = () => {
       
       {/* Ask Question Button */}
       <div className="px-4 py-3">
-        <button 
-          className="w-full py-2 bg-primary text-white rounded-lg font-medium flex items-center justify-center"
-          onClick={handleAskQuestion}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="8" x2="12" y2="16"></line>
-            <line x1="8" y1="12" x2="16" y2="12"></line>
-          </svg>
-          Ask Question Anonymously
-        </button>
+        {activeRoom === 'meetups' ? (
+          <button 
+            className="w-full py-2 bg-primary text-white rounded-lg font-medium flex items-center justify-center"
+            onClick={() => setMeetupDialogOpen(true)}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            Join Meetup
+          </button>
+        ) : (
+          <button 
+            className="w-full py-2 bg-primary text-white rounded-lg font-medium flex items-center justify-center"
+            onClick={handleAskQuestion}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="16"></line>
+              <line x1="8" y1="12" x2="16" y2="12"></line>
+            </svg>
+            Ask Question Anonymously
+          </button>
+        )}
       </div>
       
+      {/* Meetup Dialog */}
+      <Dialog open={meetupDialogOpen} onOpenChange={setMeetupDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Join a Meetup</DialogTitle>
+            <DialogDescription>
+              Connect with other gluten-free students in person
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4 py-3">
+            {upcomingMeetups.map((meetup) => (
+              <div key={meetup.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-3">
+                <h3 className="font-medium text-gray-900 dark:text-white">{meetup.title}</h3>
+                <div className="mt-2 space-y-1">
+                  <p className="text-sm flex items-center text-gray-600 dark:text-gray-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                      <line x1="16" y1="2" x2="16" y2="6"></line>
+                      <line x1="8" y1="2" x2="8" y2="6"></line>
+                      <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    {meetup.date}
+                  </p>
+                  <p className="text-sm flex items-center text-gray-600 dark:text-gray-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    {meetup.time}
+                  </p>
+                  <p className="text-sm flex items-center text-gray-600 dark:text-gray-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                      <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    {meetup.location}
+                  </p>
+                  <p className="text-sm flex items-center text-gray-600 dark:text-gray-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="9" cy="7" r="4"></circle>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    {meetup.attendees}/{meetup.maxAttendees} attendees
+                  </p>
+                </div>
+                <div className="mt-3 flex justify-between items-center">
+                  <span className="text-xs text-gray-500 dark:text-gray-400">Hosted by: {meetup.host}</span>
+                  <button 
+                    className="px-3 py-1 bg-primary text-white rounded-lg text-sm"
+                    onClick={() => {
+                      setMeetupDialogOpen(false);
+                      toast({
+                        title: "Success!",
+                        description: `You've joined the "${meetup.title}" meetup on ${meetup.date}`,
+                      });
+                    }}
+                  >
+                    Join
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </DialogContent>
+      </Dialog>
+      
+      {/* Meetups display when meetups tab is selected */}
+      {activeRoom === 'meetups' && (
+        <div className="px-4 py-2">
+          <h3 className="text-lg font-medium mb-3 dark:text-white">Upcoming Meetups</h3>
+          <div className="space-y-4">
+            {upcomingMeetups.map((meetup) => (
+              <div key={meetup.id} className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+                <h4 className="font-medium mb-2 dark:text-white">{meetup.title}</h4>
+                <div className="space-y-1 mb-3">
+                  <p className="text-sm flex items-center text-gray-600 dark:text-gray-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                      <line x1="16" y1="2" x2="16" y2="6"></line>
+                      <line x1="8" y1="2" x2="8" y2="6"></line>
+                      <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    {meetup.date} • {meetup.time}
+                  </p>
+                  <p className="text-sm flex items-center text-gray-600 dark:text-gray-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                      <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    {meetup.location}
+                  </p>
+                  <p className="text-sm flex items-center text-gray-600 dark:text-gray-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="9" cy="7" r="4"></circle>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    {meetup.attendees}/{meetup.maxAttendees} attendees
+                  </p>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-gray-500 dark:text-gray-400">Hosted by: {meetup.host}</span>
+                  <button 
+                    className="px-3 py-1 bg-primary text-white rounded-lg text-sm"
+                    onClick={() => {
+                      toast({
+                        title: "Success!",
+                        description: `You've joined the "${meetup.title}" meetup on ${meetup.date}`,
+                      });
+                    }}
+                  >
+                    Join
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+            <h4 className="font-medium mb-2 dark:text-white">Want to host a meetup?</h4>
+            <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
+              If you'd like to organize a gluten-free gathering or event, we can help you connect with other members.
+            </p>
+            <button className="w-full py-2 border border-primary text-primary dark:text-primary-foreground dark:border-primary-foreground rounded-lg font-medium"
+              onClick={() => {
+                toast({
+                  title: "Host a Meetup",
+                  description: "Meetup hosting form would appear here",
+                });
+              }}
+            >
+              Create a Meetup
+            </button>
+          </div>
+        </div>
+      )}
+      
       {/* Community Posts */}
-      <div className="px-4 py-2">
-        {isLoading ? (
+      {activeRoom !== 'meetups' && (
+        <div className="px-4 py-2">
+          {isLoading ? (
           // Skeleton loading state
           Array(2).fill(null).map((_, index) => (
             <div key={index} className="bg-white rounded-lg border border-gray-200 p-4 mb-4 animate-pulse">
@@ -233,6 +437,7 @@ const Community: React.FC = () => {
           </button>
         )}
       </div>
+      )}
     </div>
   );
 };
