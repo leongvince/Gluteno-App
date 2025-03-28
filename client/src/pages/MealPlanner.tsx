@@ -116,18 +116,18 @@ const MealPlanner: React.FC = () => {
     if (!recipe) {
       return (
         <div 
-          className="bg-white rounded-lg border border-gray-200 p-3 border-dashed flex items-center justify-center h-20 cursor-pointer"
+          className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3 border-dashed flex items-center justify-center h-20 cursor-pointer"
           onClick={() => addMeal(mealType)}
         >
-          <span className="text-sm text-gray-500">Tap to add {mealType}</span>
+          <span className="text-sm text-gray-500 dark:text-gray-300">Tap to add {mealType}</span>
         </div>
       );
     }
     
     return (
-      <div className="bg-white rounded-lg border border-gray-200 p-3">
+      <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3">
         <div className="flex">
-          <div className="w-16 h-16 bg-gray-200 rounded-lg mr-3 overflow-hidden">
+          <div className="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-lg mr-3 overflow-hidden">
             <img 
               src={recipe.image} 
               alt={recipe.name} 
@@ -138,8 +138,8 @@ const MealPlanner: React.FC = () => {
             />
           </div>
           <div className="flex-1">
-            <h5 className="font-medium text-sm">{recipe.name}</h5>
-            <div className="flex items-center mt-1 text-xs text-gray-500">
+            <h5 className="font-medium text-sm dark:text-white">{recipe.name}</h5>
+            <div className="flex items-center mt-1 text-xs text-gray-500 dark:text-gray-300">
               <span className="flex items-center mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="12" r="10"></circle>
@@ -159,13 +159,13 @@ const MealPlanner: React.FC = () => {
             </div>
             <div className="mt-2 flex">
               <button 
-                className="text-xs text-primary mr-3"
+                className="text-xs text-primary dark:text-primary-foreground mr-3"
                 onClick={() => viewRecipe(recipe)}
               >
                 View Recipe
               </button>
               <button 
-                className={`text-xs ${recipe.favorite ? 'text-red-500' : 'text-gray-500'}`}
+                className={`text-xs ${recipe.favorite ? 'text-red-500' : 'text-gray-500 dark:text-gray-300'}`}
                 onClick={() => toggleFavorite(recipe)}
               >
                 {recipe.favorite ? (
@@ -205,16 +205,16 @@ const MealPlanner: React.FC = () => {
         
         <TabsContent value="planner">
           {/* Day Selector */}
-          <div className="px-4 py-3 bg-white border-b border-gray-200">
+          <div className="px-4 py-3 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
             <div className="flex justify-between items-center">
               <button className="p-1" onClick={goToPreviousDay}>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500 dark:text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
               </button>
-              <h3 className="font-medium">{formattedDate}</h3>
+              <h3 className="font-medium dark:text-white">{formattedDate}</h3>
               <button className="p-1" onClick={goToNextDay}>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500 dark:text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
               </button>
@@ -228,18 +228,18 @@ const MealPlanner: React.FC = () => {
               Array(4).fill(null).map((_, index) => (
                 <div key={index} className="mb-6">
                   <div className="flex items-center justify-between mb-2">
-                    <div className="h-5 bg-gray-200 rounded w-24"></div>
-                    <div className="h-4 bg-gray-200 rounded w-16"></div>
+                    <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-24"></div>
+                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
                   </div>
-                  <div className="bg-white rounded-lg border border-gray-200 p-3 animate-pulse">
+                  <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3 animate-pulse">
                     <div className="flex">
-                      <div className="w-16 h-16 bg-gray-200 rounded-lg mr-3"></div>
+                      <div className="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-lg mr-3"></div>
                       <div className="flex-1">
-                        <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                        <div className="h-3 bg-gray-200 rounded w-1/2 mb-2"></div>
+                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2"></div>
+                        <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/2 mb-2"></div>
                         <div className="mt-2 flex">
-                          <div className="h-3 bg-gray-200 rounded w-16 mr-3"></div>
-                          <div className="h-3 bg-gray-200 rounded w-6"></div>
+                          <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-16 mr-3"></div>
+                          <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-6"></div>
                         </div>
                       </div>
                     </div>
@@ -251,8 +251,8 @@ const MealPlanner: React.FC = () => {
                 {/* Breakfast */}
                 <div className="mb-6">
                   <div className="flex items-center justify-between mb-2">
-                    <h4 className="font-medium text-gray-800">Breakfast</h4>
-                    <button className="text-sm text-primary" onClick={() => addMeal('breakfast')}>Add Meal</button>
+                    <h4 className="font-medium text-gray-800 dark:text-white">Breakfast</h4>
+                    <button className="text-sm text-primary dark:text-primary-foreground" onClick={() => addMeal('breakfast')}>Add Meal</button>
                   </div>
                   {renderMealCard('breakfast', meals?.breakfast || null)}
                 </div>
@@ -260,8 +260,8 @@ const MealPlanner: React.FC = () => {
                 {/* Lunch */}
                 <div className="mb-6">
                   <div className="flex items-center justify-between mb-2">
-                    <h4 className="font-medium text-gray-800">Lunch</h4>
-                    <button className="text-sm text-primary" onClick={() => addMeal('lunch')}>Add Meal</button>
+                    <h4 className="font-medium text-gray-800 dark:text-white">Lunch</h4>
+                    <button className="text-sm text-primary dark:text-primary-foreground" onClick={() => addMeal('lunch')}>Add Meal</button>
                   </div>
                   {renderMealCard('lunch', meals?.lunch || null)}
                 </div>
@@ -269,8 +269,8 @@ const MealPlanner: React.FC = () => {
                 {/* Dinner */}
                 <div className="mb-6">
                   <div className="flex items-center justify-between mb-2">
-                    <h4 className="font-medium text-gray-800">Dinner</h4>
-                    <button className="text-sm text-primary" onClick={() => addMeal('dinner')}>Add Meal</button>
+                    <h4 className="font-medium text-gray-800 dark:text-white">Dinner</h4>
+                    <button className="text-sm text-primary dark:text-primary-foreground" onClick={() => addMeal('dinner')}>Add Meal</button>
                   </div>
                   {renderMealCard('dinner', meals?.dinner || null)}
                 </div>
@@ -278,8 +278,8 @@ const MealPlanner: React.FC = () => {
                 {/* Snacks */}
                 <div className="mb-6">
                   <div className="flex items-center justify-between mb-2">
-                    <h4 className="font-medium text-gray-800">Snacks</h4>
-                    <button className="text-sm text-primary" onClick={() => addMeal('snack')}>Add Snack</button>
+                    <h4 className="font-medium text-gray-800 dark:text-white">Snacks</h4>
+                    <button className="text-sm text-primary dark:text-primary-foreground" onClick={() => addMeal('snack')}>Add Snack</button>
                   </div>
                   {renderMealCard('snack', meals?.snack || null)}
                 </div>
