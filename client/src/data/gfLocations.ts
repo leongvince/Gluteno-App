@@ -14,7 +14,7 @@ const gfLocations: Restaurant[] = [
     rating: 4,
     reviewCount: 42,
     gfOption: "GF menu available",
-    image: "/images/restaurants/restaurant1.jpg",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6oLg_8GyaHmsx3gj1o7kAO3DTLOG2SBVvPw&s",
     lat: 1.3483 + 0.003,
     lng: 103.6831 + 0.002
   },
@@ -28,7 +28,7 @@ const gfLocations: Restaurant[] = [
     rating: 3,
     reviewCount: 28,
     gfOption: "Ask about cross-contamination",
-    image: "/images/restaurants/restaurant2.jpg",
+    image: "https://www.lovemysalad.com/sites/default/files/misc/colourfull_salad_bowl.jpg",
     lat: 1.3483 + 0.001,
     lng: 103.6831 - 0.002
   },
@@ -42,7 +42,7 @@ const gfLocations: Restaurant[] = [
     rating: 5,
     reviewCount: 64,
     gfOption: "All smoothies GF certified",
-    image: "/images/restaurants/restaurant3.jpg",
+    image: "https://img.taste.com.au/gVht4kN-/taste/2020/01/jan20_easy-berry-smoothie-taste-156331-1.jpg",
     lat: 1.3483 - 0.002,
     lng: 103.6831 - 0.003
   },
@@ -56,7 +56,7 @@ const gfLocations: Restaurant[] = [
     rating: 4,
     reviewCount: 38,
     gfOption: "GF options clearly marked",
-    image: "/images/restaurants/restaurant4.jpg",
+    image: "https://images.squarespace-cdn.com/content/v1/562fb976e4b0aaa589ce1cef/1446757177158-7K9EQOQUDPGK5UFAD9SZ/nutri-bowl.jpg",
     lat: 1.3483 - 0.001,
     lng: 103.6831 + 0.001
   },
@@ -70,7 +70,7 @@ const gfLocations: Restaurant[] = [
     rating: 5,
     reviewCount: 87,
     gfOption: "Dedicated GF kitchen",
-    image: "/images/restaurants/restaurant5.jpg",
+    image: "https://media-cdn.tripadvisor.com/media/photo-s/08/7d/82/86/lhh-straits-chinese-kitchen.jpg",
     lat: 1.3483 + 0.005,
     lng: 103.6831 - 0.001
   },
@@ -84,7 +84,7 @@ const gfLocations: Restaurant[] = [
     rating: 3,
     reviewCount: 122,
     gfOption: "Some labeled GF options",
-    image: "/images/restaurants/restaurant6.jpg",
+    image: "https://5.imimg.com/data5/SELLER/Default/2024/7/438116403/PR/UO/IB/225149120/office-canteen-service.jpg",
     lat: 1.3483,
     lng: 103.6831
   },
@@ -98,7 +98,7 @@ const gfLocations: Restaurant[] = [
     rating: 4,
     reviewCount: 56,
     gfOption: "Most items GF, clearly marked",
-    image: "/images/restaurants/restaurant7.jpg",
+    image: "https://lifemadesweeter.com/wp-content/uploads/How-To-Make-A-Veggie-Platter-Recipe-Photo-Picture-500x375.jpg",
     lat: 1.3483 - 0.003,
     lng: 103.6831 + 0.004
   },
@@ -112,7 +112,7 @@ const gfLocations: Restaurant[] = [
     rating: 4,
     reviewCount: 34,
     gfOption: "GF snacks available on request",
-    image: "/images/restaurants/restaurant8.jpg",
+    image: "https://www.davaocity.gov.ph/wp-content/uploads/2022/12/viber_image_2022-12-14_11-21-41-095.jpg",
     lat: 1.3483 + 0.001,
     lng: 103.6831 + 0.001
   },
@@ -128,7 +128,7 @@ const gfLocations: Restaurant[] = [
     rating: 4.5,
     reviewCount: 78,
     gfOption: "Many GF options available",
-    image: "/images/restaurants/restaurant9.jpg",
+    image: "https://media.post.rvohealth.io/wp-content/uploads/2022/05/various-grains-732-549-feature-thumb-1.jpg",
     lat: 1.3041,
     lng: 103.8316
   },
@@ -142,7 +142,7 @@ const gfLocations: Restaurant[] = [
     rating: 4.3,
     reviewCount: 65,
     gfOption: "GF options clearly labeled",
-    image: "/images/restaurants/restaurant10.jpg",
+    image: "https://www.yellowblissroad.com/wp-content/uploads/2021/10/Veggie-tray-ingredients-1-scaled.jpg",
     lat: 1.3022,
     lng: 103.8368
   },
@@ -170,7 +170,7 @@ const gfLocations: Restaurant[] = [
     rating: 4.9,
     reviewCount: 106,
     gfOption: "Certified gluten-free facility",
-    image: "https://images.unsplash.com/photo-1564759077036-3def472ffd3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    image: "https://images.livspace-cdn.com/plain/https://jumanji.livspace-cdn.com/magazine/wp-content/uploads/sites/3/2023/03/02113941/wet-and-dry-kitchen-design.jpg",
     lat: 1.3010,
     lng: 103.8320
   },
@@ -214,7 +214,7 @@ const gfLocations: Restaurant[] = [
     rating: 4.6,
     reviewCount: 82,
     gfOption: "All bowls are GF, dedicated prep area",
-    image: "https://images.unsplash.com/photo-1590301157890-8679078c4616?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    image: "https://simple-veganista.com/wp-content/uploads/2016/04/homemade-acai-bowl-7.jpg",
     lat: 1.2840,
     lng: 103.8570
   },
@@ -258,7 +258,7 @@ const gfLocations: Restaurant[] = [
     rating: 4.8,
     reviewCount: 156,
     gfOption: "GF rice noodle laksa available",
-    image: "https://images.unsplash.com/photo-1569562211005-9e344a2536df?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    image: "https://themeatclub.com.sg/cdn/shop/files/Singapore_Laksa.webp?v=1717059289",
     lat: 1.3752,
     lng: 103.8123
   },
@@ -286,7 +286,7 @@ const gfLocations: Restaurant[] = [
     rating: 4.4,
     reviewCount: 77,
     gfOption: "Ask for rice options - many naturally GF dishes",
-    image: "https://images.unsplash.com/photo-1585937421612-70a008356570?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    image: "https://res.cloudinary.com/rainforest-cruises/images/c_fill,g_auto/f_auto,q_auto/w_1120,h_732,c_fill,g_auto/v1661347392/india-food-paratha/india-food-paratha-1120x732.jpg",
     lat: 1.3064,
     lng: 103.8522
   },
@@ -300,7 +300,7 @@ const gfLocations: Restaurant[] = [
     rating: 4.9,
     reviewCount: 118,
     gfOption: "Certified GF rice dishes available",
-    image: "https://images.unsplash.com/photo-1563245220-f2c9e1d3b6a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    image: "https://cdn.britannica.com/94/240094-050-D5CC461B/Indian-naan-flatbread.jpg",
     lat: 1.3185,
     lng: 103.8942
   },
@@ -402,7 +402,7 @@ const gfLocations: Restaurant[] = [
     rating: 4.5,
     reviewCount: 87,
     gfOption: "Allergen-free environment, 100% GF",
-    image: "https://images.unsplash.com/photo-1559314809-4d1972cf29f7?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    image: "https://cdn.britannica.com/94/240094-050-D5CC461B/Indian-naan-flatbread.jpg",
     lat: 1.3005,
     lng: 103.8550
   },

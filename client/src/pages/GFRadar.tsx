@@ -604,11 +604,11 @@ const GFRadar: React.FC = () => {
             <div key={restaurant.id} className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3 mb-3">
               <div className="flex">
                 <div className="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-lg mr-3 overflow-hidden">
-                  <img 
-                    src="/images/restaurants/restaurant.svg" 
-                    alt={`${restaurant.name} food`} 
-                    className="w-full h-full object-cover"
-                  />
+                <img 
+  src={restaurant.image} 
+  alt={`${restaurant.name} food`} 
+  className="w-full h-full object-cover"
+/>
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center">
