@@ -7,14 +7,15 @@ import {
   Facebook, 
   Twitter, 
   Instagram, 
-  Linkedin, 
   Copy, 
   MessageCircle, 
   Heart, 
   Share2, 
   UserPlus, 
   UserMinus,
-  Check
+  Check,
+  Send, // Telegram icon
+  Phone // WhatsApp icon
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
@@ -87,8 +88,11 @@ const SocialFeatures: React.FC<SocialFeaturesProps> = ({ recipeId, recipeName, r
       case 'twitter':
         url = `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
         break;
-      case 'linkedin':
-        url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+      case 'telegram':
+        url = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
+        break;
+      case 'whatsapp':
+        url = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`;
         break;
       case 'copy':
         navigator.clipboard.writeText(shareUrl).then(() => {
@@ -241,15 +245,24 @@ const SocialFeatures: React.FC<SocialFeaturesProps> = ({ recipeId, recipeName, r
                 <Button 
                   variant="outline" 
                   className="flex flex-col items-center justify-center p-3 h-auto"
-                  onClick={() => shareToSocial('linkedin')}
+                  onClick={() => shareToSocial('telegram')}
                 >
-                  <Linkedin className="h-6 w-6 text-blue-700" />
-                  <span className="mt-1 text-xs">LinkedIn</span>
+                  <Send className="h-6 w-6 text-blue-500" />
+                  <span className="mt-1 text-xs">Telegram</span>
                 </Button>
                 
                 <Button 
                   variant="outline" 
                   className="flex flex-col items-center justify-center p-3 h-auto"
+                  onClick={() => shareToSocial('whatsapp')}
+                >
+                  <Phone className="h-6 w-6 text-green-600" />
+                  <span className="mt-1 text-xs">WhatsApp</span>
+                </Button>
+                
+                <Button 
+                  variant="outline" 
+                  className="flex flex-col items-center justify-center p-3 h-auto col-span-4 mt-2"
                   onClick={() => shareToSocial('copy')}
                 >
                   {isLinkCopied ? (

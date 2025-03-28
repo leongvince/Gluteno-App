@@ -10,8 +10,9 @@ interface ThemeToggleProps {
 export function ThemeToggle({ className }: ThemeToggleProps) {
   const { theme, setTheme } = useTheme();
 
+  // Theme is always dark, so this is just here for compatibility
   const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+    setTheme('dark');
   };
 
   return (
@@ -20,13 +21,9 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
       size="icon"
       onClick={toggleTheme}
       className={className}
-      aria-label="Toggle theme"
+      aria-label="Dark mode"
     >
-      {theme === 'light' ? (
-        <Moon className="h-[1.2rem] w-[1.2rem] rotate-90 transition-all dark:rotate-0" />
-      ) : (
-        <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 transition-all dark:-rotate-90" />
-      )}
+      <Moon className="h-[1.2rem] w-[1.2rem] rotate-0 transition-all" />
     </Button>
   );
 }

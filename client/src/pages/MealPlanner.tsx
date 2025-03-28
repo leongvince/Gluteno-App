@@ -16,8 +16,18 @@ interface Recipe {
   mealType: 'breakfast' | 'lunch' | 'dinner' | 'snack';
 }
 
+interface User {
+  id: number;
+  name: string;
+  username: string;
+  avatarUrl: string;
+}
+
 const MealPlanner: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [searchQuery, setSearchQuery] = useState('');
+  const [foundUsers, setFoundUsers] = useState<User[]>([]);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const { toast } = useToast();
   const queryClient = useQueryClient();
   
@@ -187,7 +197,39 @@ const MealPlanner: React.FC = () => {
 
   // For sharing the current recipe we're viewing
   const selectedRecipe = meals?.breakfast || meals?.lunch || meals?.dinner || meals?.snack;
+
+  // Search for users
+  const handleSearch = () => {
+    if (searchQuery.trim() === '') {
+      setFoundUsers([]);
+      return;
+    }
+    
+    // Mock user search - in a real app, this would be an API call
+    const mockUsers: User[] = [
+      { id: 1, name: 'Emma Wilson', username: '@emma_w', avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330' },
+      { id: 2, name: 'Alex Chen', username: '@alexc', avatarUrl: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36' },
+      { id: 3, name: 'Taylor Kim', username: '@taylor_k', avatarUrl: 'https://images.unsplash.com/photo-1580489944761-15a19d654956' },
+      { id: 4, name: 'Morgan Smith', username: '@morgansmith', avatarUrl: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d' },
+      { id: 5, name: 'Jordan Lee', username: '@jlee', avatarUrl: 'https://images.unsplash.com/photo-1607746882042-944635dfe10e' },
+      { id: 6, name: 'Sam Richards', username: '@sam_r', avatarUrl: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde' },
+    ];
+    
+    const filteredUsers = mockUsers.filter(user => 
+      user.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+      user.username.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    
+    setFoundUsers(filteredUsers);
+  };
   
+  const viewUserMealPlan = (user: User) => {
+    setSelectedUser(user);
+    toast({
+      title: `Viewing ${user.name}'s meal plan`,
+      description: "You can now see what meals they have planned",
+    });
+  };
   return (
     <div className="pb-16">
       <div className="px-4 py-3 bg-primary text-white sticky top-0 z-10">
@@ -301,6 +343,128 @@ const MealPlanner: React.FC = () => {
             <p className="text-sm text-muted-foreground mb-4">
               Connect with friends, share recipes, and discover new meal ideas from your network.
             </p>
+            
+            {/* User Search Bar */}
+            <div className="mb-6">
+              <h4 className="text-base font-medium mb-2">Find Users</h4>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  placeholder="Search by name or username"
+                  className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:text-white"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <button
+                  onClick={handleSearch}
+                  className="px-4 py-2 bg-primary text-white rounded-lg"
+                >
+                  Search
+                </button>
+              </div>
+            </div>
+            
+            {/* Search Results */}
+            {foundUsers.length > 0 && (
+              <div className="mb-6">
+                <h4 className="text-base font-medium mb-2">Search Results</h4>
+                <div className="space-y-3">
+                  {foundUsers.map(user => (
+                    <div key={user.id} className="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 rounded-full overflow-hidden">
+                          <img 
+                            src={user.avatarUrl} 
+                            alt={user.name} 
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = 'https://via.placeholder.com/40x40?text=User';
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <p className="font-medium dark:text-white">{user.name}</p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400">{user.username}</p>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => viewUserMealPlan(user)}
+                        className="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 text-primary rounded-lg"
+                      >
+                        View Meal Plan
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            {/* Selected User's Meal Plan */}
+            {selectedUser && (
+              <div className="mb-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="text-base font-medium">{selectedUser.name}'s Meal Plan</h4>
+                  <button 
+                    onClick={() => setSelectedUser(null)}
+                    className="text-sm text-gray-500 dark:text-gray-400"
+                  >
+                    Back to your plan
+                  </button>
+                </div>
+                
+                <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 rounded-full overflow-hidden mr-3">
+                      <img 
+                        src={selectedUser.avatarUrl} 
+                        alt={selectedUser.name} 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div>
+                      <h5 className="font-medium dark:text-white">{selectedUser.name}</h5>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">{selectedUser.username}</p>
+                    </div>
+                  </div>
+                  
+                  {/* Example meal plan - in a real app, this would be fetched from an API */}
+                  <div className="space-y-4">
+                    <div>
+                      <h6 className="text-sm font-medium mb-2 dark:text-white">Breakfast</h6>
+                      <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <p className="text-sm dark:text-white">GF Banana Pancakes</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-300">15 mins • High protein</p>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <h6 className="text-sm font-medium mb-2 dark:text-white">Lunch</h6>
+                      <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <p className="text-sm dark:text-white">Mediterranean Salad Bowl</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-300">10 mins • Budget friendly</p>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <h6 className="text-sm font-medium mb-2 dark:text-white">Dinner</h6>
+                      <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <p className="text-sm dark:text-white">Rice Noodle Stir Fry</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-300">25 mins • High fiber</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-4 flex justify-between">
+                    <button className="px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-lg dark:text-white">
+                      Like Plan
+                    </button>
+                    <button className="px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-lg dark:text-white">
+                      Save Recipes
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
             
             <SocialFeatures 
               recipeId={selectedRecipe?.id}

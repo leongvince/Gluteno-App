@@ -132,7 +132,7 @@ const GFRadar: React.FC = () => {
           case 'breakfast':
             return cuisine.includes('breakfast') || cuisine.includes('brunch');
           case 'noodles':
-            return cuisine.includes('noodle') || cuisine.includes('pasta') || cuisine.includes('ramen');
+            return cuisine.includes('noodle') || cuisine.includes('pasta') || cuisine.includes('ramen') || cuisine.includes('rice noodle') || cuisine.includes('glass noodle');
           default:
             return true;
         }
@@ -302,10 +302,10 @@ const GFRadar: React.FC = () => {
           Breakfast 🍳
         </button>
         <button 
-          className={`px-3 py-1 text-sm ${activeFilter === 'noodles' ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'} rounded-full whitespace-nowrap`}
+          className={`px-3 py-1 text-sm ${activeFilter === 'noodles' ? 'bg-primary text-white' : 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100'} rounded-full whitespace-nowrap font-medium`}
           onClick={() => handleFilterClick('noodles')}
         >
-          Noodles 🍜
+          GF Noodles 🍜 ✓
         </button>
       </div>
       

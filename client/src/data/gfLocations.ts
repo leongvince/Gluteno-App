@@ -379,7 +379,79 @@ const gfLocations: Restaurant[] = [
     lng: 103.7380
   },
   
-  // Sentosa
+  // North Singapore - New Noodle Options
+  {
+    id: 29,
+    name: "Noodle Haven",
+    status: "verified",
+    distance: "3.5km",
+    priceRange: "$$",
+    cuisine: "Rice Noodles",
+    rating: 4.7,
+    reviewCount: 93,
+    gfOption: "Dedicated GF rice noodle kitchen",
+    image: "https://images.unsplash.com/photo-1557872943-16a5ac26437e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.4183,
+    lng: 103.8172
+  },
+  {
+    id: 30,
+    name: "Woodlands Noodle Bar",
+    status: "verified",
+    distance: "4.2km",
+    priceRange: "$$",
+    cuisine: "Asian Noodles",
+    rating: 4.5,
+    reviewCount: 78,
+    gfOption: "Rice noodle options available",
+    image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.4379,
+    lng: 103.7864
+  },
+  {
+    id: 31,
+    name: "Yishun GF Kitchen",
+    status: "verified",
+    distance: "5.1km",
+    priceRange: "$$",
+    cuisine: "Chinese Rice Noodles",
+    rating: 4.6,
+    reviewCount: 85,
+    gfOption: "Certified gluten-free rice noodle dishes",
+    image: "https://images.unsplash.com/photo-1618889482923-38250401a84e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.4296,
+    lng: 103.8356
+  },
+  {
+    id: 32,
+    name: "Khatib Noodle House",
+    status: "check",
+    distance: "5.8km",
+    priceRange: "$",
+    cuisine: "Singapore Noodles",
+    rating: 4.3,
+    reviewCount: 68,
+    gfOption: "Ask for rice noodle options",
+    image: "https://images.unsplash.com/photo-1527427337751-fdca2f128ce5?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.4172,
+    lng: 103.8283
+  },
+  {
+    id: 33,
+    name: "North Glass Noodle Bar",
+    status: "verified",
+    distance: "3.8km",
+    priceRange: "$$",
+    cuisine: "Korean Glass Noodles",
+    rating: 4.8,
+    reviewCount: 92,
+    gfOption: "Sweet potato noodles (100% GF)",
+    image: "https://images.unsplash.com/photo-1552611052-33e04de081de?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    lat: 1.4232,
+    lng: 103.8341
+  },
+  
+// Sentosa
   {
     id: 27,
     name: "Island GF Retreat",
