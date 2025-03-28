@@ -1,0 +1,100 @@
+🧩 App Structure – Key Screens & Features
+1. Home Screen
+Goal: Encourage exploration without overwhelming the user
+
+Elements:
+
+Welcome message (e.g., “Hey Amanda, here’s today’s GF tip 🍞❌”)
+
+Daily tracker summary (mood, meals, exposure)
+
+Featured quick link buttons:
+
+“Find GF Eats Nearby”
+
+“GF 101”
+
+“Join a Meetup”
+
+“Ask the Community”
+
+👉 Design Tip: Use icons + labels (like cards or bubbles) so it feels visual and easy to browse.
+
+2. GF Radar Map
+Goal: Help users locate gluten-free options quickly
+
+Features:
+
+Interactive map view (powered by Google Maps or mock dataset)
+
+Search bar: “Gluten-Free Nasi Lemak near NTU”
+
+Filters: Price, distance, student-recommended
+
+User reviews and flags (“Staff was helpful” / “Cross-contamination risk”)
+
+Verified icon for trusted partners
+
+👉 Design Tip: Color-coded pins (green = verified GF, yellow = check with staff, red = flagged)
+
+3. Learn Zone (GF 101)
+Goal: Bite-sized learning to build awareness and confidence
+
+Sections:
+
+What is Celiac Disease?
+
+Hidden gluten checklist
+
+Eating out tips
+
+Supermarket survival guide
+
+Video stories from other students
+
+👉 Design Tip: Use swipeable cards or accordions for each topic with illustrations or icons.
+
+4. Meal Planner
+Goal: Enable simple, budget-friendly GF meal prep
+
+Features:
+
+Daily meal slots: Breakfast / Lunch / Dinner / Snack
+
+Quick recipes (5–15 mins) with ingredients, cost estimate, and steps
+
+Save favorites or share with friends
+
+Option to auto-generate a weekly plan
+
+👉 Design Tip: Use soft pastel colors with clean icons (e.g., 🍳🥗) and minimal text per recipe card.
+
+5. Community Chat (Ask Anonymously)
+Goal: Peer support & social connection without stigma
+
+Features:
+
+Post questions anonymously (“Can I eat mala hotpot safely?”)
+
+Upvote answers, react with emojis
+
+“Tag a dietitian” option for verified advice
+
+Themed rooms (Newly Diagnosed, GF Recipes, Budget Meals, Dining Out)
+
+👉 Design Tip: Friendly bubble-style chat UI, clear thread hierarchy
+
+6. Progress Tracker
+Goal: Encourage reflection without pressure
+
+Features:
+
+Mood & symptoms journal
+
+GF adherence checklist
+
+Weekly summary with a positive message (e.g., “You went GF 5/7 days this week. You’re doing great!”)
+
+Streaks, badges (e.g., “First 3 GF Days”, “Tried a New Recipe”)
+
+👉 Design Tip: Gamify it lightly. Add smiley/frowny sliders and color-coded progress bars.
