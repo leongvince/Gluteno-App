@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { getGFLocations } from '@/lib/mapUtils';
+import { getGFLocations, DEFAULT_MAP_CENTER, DEFAULT_MAP_ZOOM } from '@/lib/mapUtils';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
@@ -34,9 +34,7 @@ const checkIcon = L.divIcon({
 
 
 
-// Center on Singapore NTU campus
-const DEFAULT_CENTER = [1.3483, 103.6831];
-const DEFAULT_ZOOM = 15;
+// Default constants are imported from mapUtils.ts
 
 interface Restaurant {
   id: number;
@@ -55,7 +53,9 @@ interface Restaurant {
 
 const GFRadar: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeFilter, setActiveFilter] = useState('student');
+  const [activeFilter, setActiveFilter] = useState('all');
+  const [activeSubFilter, setActiveSubFilter] = useState('');
+  const [filteredRestaurants, setFilteredRestaurants] = useState<Restaurant[]>([]);
   const mapRef = useRef<L.Map | null>(null);
 
   const { data: restaurants, isLoading } = useQuery({
@@ -90,8 +90,86 @@ const GFRadar: React.FC = () => {
   };
 
   const handleFilterClick = (filter: string) => {
-    setActiveFilter(filter === activeFilter ? '' : filter);
+    setActiveFilter(filter === activeFilter ? 'all' : filter);
   };
+  
+  const handleSubFilterClick = (filter: string) => {
+    setActiveSubFilter(filter === activeSubFilter ? '' : filter);
+  };
+  
+  useEffect(() => {
+    // Set initial filtered restaurants when data is loaded
+    if (restaurants) {
+      setFilteredRestaurants(restaurants);
+    }
+  }, [restaurants]);
+  
+  // Apply filters whenever they change
+  useEffect(() => {
+    if (!restaurants) return;
+    
+    let results = [...restaurants];
+    
+    // Apply main cuisine filter
+    if (activeFilter !== 'all') {
+      results = results.filter(restaurant => {
+        const cuisine = restaurant.cuisine.toLowerCase();
+        switch(activeFilter) {
+          case 'drinks':
+            return cuisine.includes('cafe') || cuisine.includes('tea') || cuisine.includes('juice') || cuisine.includes('coffee');
+          case 'bakery':
+            return cuisine.includes('bakery') || cuisine.includes('cake') || cuisine.includes('pastry') || cuisine.includes('dessert');
+          case 'local':
+            return cuisine.includes('hawker') || cuisine.includes('local') || cuisine.includes('singaporean') || cuisine.includes('malaysian');
+          case 'burgers':
+            return cuisine.includes('burger') || cuisine.includes('fast food');
+          case 'breakfast':
+            return cuisine.includes('breakfast') || cuisine.includes('brunch');
+          case 'noodles':
+            return cuisine.includes('noodle') || cuisine.includes('pasta') || cuisine.includes('ramen');
+          default:
+            return true;
+        }
+      });
+    }
+    
+    // Apply sub-filters
+    if (activeSubFilter) {
+      switch (activeSubFilter) {
+        case 'nearme':
+          // Sort by distance
+          results = [...results].sort((a, b) => {
+            const distA = parseFloat(a.distance.replace('km', '').trim());
+            const distB = parseFloat(b.distance.replace('km', '').trim());
+            return distA - distB;
+          });
+          break;
+        case 'budget':
+          // Filter by price ($ or $$)
+          results = results.filter(r => r.priceRange === '$' || r.priceRange === '$$');
+          break;
+        case 'student':
+          // Sort by rating for student recommended places
+          results = [...results].sort((a, b) => b.rating - a.rating);
+          break;
+        case 'certified':
+          // Filter only verified places
+          results = results.filter(r => r.status === 'verified');
+          break;
+      }
+    }
+    
+    // Apply search query
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      results = results.filter(restaurant => 
+        restaurant.name.toLowerCase().includes(query) || 
+        restaurant.cuisine.toLowerCase().includes(query)
+      );
+    }
+    
+    setFilteredRestaurants(results);
+  }, [restaurants, activeFilter, activeSubFilter, searchQuery]);
 
   const renderStars = (rating: number) => {
     const stars = [];
@@ -139,29 +217,75 @@ const GFRadar: React.FC = () => {
         </div>
       </div>
       
-      {/* Filters */}
+      {/* Cuisine Filters */}
       <div className="px-4 py-2 flex space-x-2 overflow-x-auto bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <button 
-          className={`px-3 py-1 text-sm ${activeFilter === 'price' ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'} rounded-full whitespace-nowrap`}
-          onClick={() => handleFilterClick('price')}
+          className={`px-3 py-1 text-sm ${activeFilter === 'all' ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'} rounded-full whitespace-nowrap`}
+          onClick={() => handleFilterClick('all')}
         >
-          Price 💲
+          All
         </button>
         <button 
-          className={`px-3 py-1 text-sm ${activeFilter === 'distance' ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'} rounded-full whitespace-nowrap`}
-          onClick={() => handleFilterClick('distance')}
+          className={`px-3 py-1 text-sm ${activeFilter === 'drinks' ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'} rounded-full whitespace-nowrap`}
+          onClick={() => handleFilterClick('drinks')}
         >
-          Distance 📍
+          Drinks 🥤
         </button>
         <button 
-          className={`px-3 py-1 text-sm ${activeFilter === 'student' ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'} rounded-full whitespace-nowrap`}
-          onClick={() => handleFilterClick('student')}
+          className={`px-3 py-1 text-sm ${activeFilter === 'bakery' ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'} rounded-full whitespace-nowrap`}
+          onClick={() => handleFilterClick('bakery')}
         >
-          Student Recommended ⭐
+          Bakery & Cake 🍰
         </button>
         <button 
-          className={`px-3 py-1 text-sm ${activeFilter === 'certified' ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'} rounded-full whitespace-nowrap`}
-          onClick={() => handleFilterClick('certified')}
+          className={`px-3 py-1 text-sm ${activeFilter === 'local' ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'} rounded-full whitespace-nowrap`}
+          onClick={() => handleFilterClick('local')}
+        >
+          Local Food 🍜
+        </button>
+        <button 
+          className={`px-3 py-1 text-sm ${activeFilter === 'burgers' ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'} rounded-full whitespace-nowrap`}
+          onClick={() => handleFilterClick('burgers')}
+        >
+          Burgers 🍔
+        </button>
+        <button 
+          className={`px-3 py-1 text-sm ${activeFilter === 'breakfast' ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'} rounded-full whitespace-nowrap`}
+          onClick={() => handleFilterClick('breakfast')}
+        >
+          Breakfast 🍳
+        </button>
+        <button 
+          className={`px-3 py-1 text-sm ${activeFilter === 'noodles' ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'} rounded-full whitespace-nowrap`}
+          onClick={() => handleFilterClick('noodles')}
+        >
+          Noodles 🍜
+        </button>
+      </div>
+      
+      {/* Sub Filters */}
+      <div className="px-4 py-2 flex space-x-2 overflow-x-auto bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+        <button 
+          className={`px-3 py-1 text-sm ${activeSubFilter === 'nearme' ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'} rounded-full whitespace-nowrap`}
+          onClick={() => handleSubFilterClick('nearme')}
+        >
+          Near Me 📍
+        </button>
+        <button 
+          className={`px-3 py-1 text-sm ${activeSubFilter === 'budget' ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'} rounded-full whitespace-nowrap`}
+          onClick={() => handleSubFilterClick('budget')}
+        >
+          Budget Meals 💰
+        </button>
+        <button 
+          className={`px-3 py-1 text-sm ${activeSubFilter === 'student' ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'} rounded-full whitespace-nowrap`}
+          onClick={() => handleSubFilterClick('student')}
+        >
+          Student Approved ⭐
+        </button>
+        <button 
+          className={`px-3 py-1 text-sm ${activeSubFilter === 'certified' ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'} rounded-full whitespace-nowrap`}
+          onClick={() => handleSubFilterClick('certified')}
         >
           Certified GF ✓
         </button>
@@ -170,17 +294,17 @@ const GFRadar: React.FC = () => {
       {/* Map View */}
       <div className="relative h-64 w-full">
         <MapContainer 
-          center={DEFAULT_CENTER as [number, number]} 
-          zoom={DEFAULT_ZOOM} 
+          center={DEFAULT_MAP_CENTER as [number, number]} 
+          zoom={DEFAULT_MAP_ZOOM} 
           className="h-full w-full z-0"
-          whenCreated={(map) => { mapRef.current = map; }}
+          ref={mapRef}
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           
-          {restaurants?.map((restaurant) => (
+          {filteredRestaurants?.map((restaurant) => (
             <Marker 
               key={restaurant.id} 
               position={[restaurant.lat, restaurant.lng]}
@@ -282,8 +406,8 @@ const GFRadar: React.FC = () => {
               </div>
             </div>
           </>
-        ) : restaurants && restaurants.length > 0 ? (
-          restaurants.map((restaurant) => (
+        ) : filteredRestaurants && filteredRestaurants.length > 0 ? (
+          filteredRestaurants.map((restaurant) => (
             <div key={restaurant.id} className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3 mb-3">
               <div className="flex">
                 <div className="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-lg mr-3 overflow-hidden">
@@ -325,7 +449,7 @@ const GFRadar: React.FC = () => {
           </div>
         )}
         
-        {restaurants && restaurants.length > 0 && (
+        {filteredRestaurants && filteredRestaurants.length > 0 && (
           <button className="w-full py-2 text-primary dark:text-primary-foreground text-center text-sm font-medium">
             Load More Results
           </button>
