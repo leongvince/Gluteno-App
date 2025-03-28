@@ -14,7 +14,7 @@ const gfLocations: Restaurant[] = [
     rating: 4,
     reviewCount: 42,
     gfOption: "GF menu available",
-    image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    image: "/images/restaurants/restaurant1.jpg",
     lat: 1.3483 + 0.003,
     lng: 103.6831 + 0.002
   },
@@ -28,7 +28,7 @@ const gfLocations: Restaurant[] = [
     rating: 3,
     reviewCount: 28,
     gfOption: "Ask about cross-contamination",
-    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    image: "/images/restaurants/restaurant2.jpg",
     lat: 1.3483 + 0.001,
     lng: 103.6831 - 0.002
   },
@@ -42,7 +42,7 @@ const gfLocations: Restaurant[] = [
     rating: 5,
     reviewCount: 64,
     gfOption: "All smoothies GF certified",
-    image: "https://images.unsplash.com/photo-1502741224143-90386d7f8c82?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    image: "/images/restaurants/restaurant3.jpg",
     lat: 1.3483 - 0.002,
     lng: 103.6831 - 0.003
   },
@@ -56,7 +56,7 @@ const gfLocations: Restaurant[] = [
     rating: 4,
     reviewCount: 38,
     gfOption: "GF options clearly marked",
-    image: "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    image: "/images/restaurants/restaurant4.jpg",
     lat: 1.3483 - 0.001,
     lng: 103.6831 + 0.001
   },
@@ -70,7 +70,7 @@ const gfLocations: Restaurant[] = [
     rating: 5,
     reviewCount: 87,
     gfOption: "Dedicated GF kitchen",
-    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    image: "/images/restaurants/restaurant5.jpg",
     lat: 1.3483 + 0.005,
     lng: 103.6831 - 0.001
   },
@@ -84,7 +84,7 @@ const gfLocations: Restaurant[] = [
     rating: 3,
     reviewCount: 122,
     gfOption: "Some labeled GF options",
-    image: "https://images.unsplash.com/photo-1509315811345-672d83ef2fbc?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    image: "/images/restaurants/restaurant6.jpg",
     lat: 1.3483,
     lng: 103.6831
   },
@@ -98,7 +98,7 @@ const gfLocations: Restaurant[] = [
     rating: 4,
     reviewCount: 56,
     gfOption: "Most items GF, clearly marked",
-    image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    image: "/images/restaurants/restaurant7.jpg",
     lat: 1.3483 - 0.003,
     lng: 103.6831 + 0.004
   },
@@ -112,7 +112,7 @@ const gfLocations: Restaurant[] = [
     rating: 4,
     reviewCount: 34,
     gfOption: "GF snacks available on request",
-    image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    image: "/images/restaurants/restaurant8.jpg",
     lat: 1.3483 + 0.001,
     lng: 103.6831 + 0.001
   },
@@ -128,7 +128,7 @@ const gfLocations: Restaurant[] = [
     rating: 4.5,
     reviewCount: 78,
     gfOption: "Many GF options available",
-    image: "https://images.unsplash.com/photo-1543339494-b4cd4f7ba686?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    image: "/images/restaurants/restaurant9.jpg",
     lat: 1.3041,
     lng: 103.8316
   },
@@ -142,7 +142,7 @@ const gfLocations: Restaurant[] = [
     rating: 4.3,
     reviewCount: 65,
     gfOption: "GF options clearly labeled",
-    image: "https://images.unsplash.com/photo-1604480133435-25b86862d276?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+    image: "/images/restaurants/restaurant10.jpg",
     lat: 1.3022,
     lng: 103.8368
   },

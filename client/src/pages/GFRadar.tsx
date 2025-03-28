@@ -605,12 +605,9 @@ const GFRadar: React.FC = () => {
               <div className="flex">
                 <div className="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-lg mr-3 overflow-hidden">
                   <img 
-                    src={restaurant.image} 
+                    src="/images/restaurants/restaurant.svg" 
                     alt={`${restaurant.name} food`} 
                     className="w-full h-full object-cover"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = 'https://via.placeholder.com/100x100?text=No+Image';
-                    }} 
                   />
                 </div>
                 <div className="flex-1">
