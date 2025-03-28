@@ -2,7 +2,7 @@ import React from 'react';
 import { useTodayTip } from '@/data/dailyTips';
 
 const DailyTip: React.FC = () => {
-  const { tip, isLoading } = useTodayTip();
+  const { data: tip, isLoading } = useTodayTip();
 
   return (
     <section className="px-4 pt-4">
