@@ -31,7 +31,7 @@ function Router() {
   return (
     <div className="max-w-md mx-auto bg-white dark:bg-gray-900 min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1 overflow-y-auto dark:text-gray-100">
+      <main className="flex-1 overflow-y-auto dark:text-gray-100 pb-16"> {/* Added pb-16 to ensure content has padding at bottom */}
         <Switch>
           <Route path="/" component={Home} />
           <Route path="/gf-radar" component={GFRadar} />

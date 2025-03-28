@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { format, subDays, startOfWeek, addDays } from 'date-fns';
 import { useToast } from '@/hooks/use-toast';
@@ -60,16 +60,18 @@ const ProgressTracker: React.FC = () => {
           snacks: false
         }
       };
-    },
-    onSuccess: (data) => {
-      if (data) {
-        setCurrentMood(data.mood);
-        setSelectedSymptoms(data.symptoms || []);
-        setJournalNotes(data.notes || '');
-        setGlutenFreeItems(data.mealChecks);
-      }
     }
   });
+  
+  // Update state when todayLog changes
+  useEffect(() => {
+    if (todayLog) {
+      setCurrentMood(todayLog.mood);
+      setSelectedSymptoms(todayLog.symptoms || []);
+      setJournalNotes(todayLog.notes || '');
+      setGlutenFreeItems(todayLog.mealChecks);
+    }
+  }, [todayLog]);
 
   // Save log mutation
   const saveMutation = useMutation({
@@ -170,8 +172,11 @@ const ProgressTracker: React.FC = () => {
     "Skin Issues"
   ];
 
+  // Add console log for debugging
+  console.log("Rendering ProgressTracker component");
+  
   return (
-    <div className="pb-16">
+    <div className="pb-16 mb-16"> {/* Added mb-16 to ensure content doesn't get cut off by bottom nav */}
       <div className="px-4 py-3 bg-primary text-white sticky top-0 z-10">
         <h2 className="text-lg font-medium">Progress Tracker</h2>
         <p className="text-sm opacity-90">Monitor your gluten-free journey</p>
