@@ -4,6 +4,7 @@ import themePlugin from "@replit/vite-plugin-shadcn-theme-json";
 import path, { dirname } from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 import { fileURLToPath } from "url";
+import { viteStaticCopy } from "vite-plugin-static-copy";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -13,11 +14,18 @@ export default defineConfig({
     react(),
     runtimeErrorOverlay(),
     themePlugin(),
-    ...(process.env.NODE_ENV !== "production" &&
-    process.env.REPL_ID !== undefined
+    viteStaticCopy({
+      targets: [
+        {
+          src: path.resolve(__dirname, "_redirects").replace(/\\/g, "/"), // convert Windows backslashes to forward slashes
+          dest: "."
+        }
+      ]
+    }),
+    ...(process.env.NODE_ENV !== "production" && process.env.REPL_ID === undefined
       ? [
           await import("@replit/vite-plugin-cartographer").then((m) =>
-            m.cartographer(),
+            m.cartographer()
           ),
         ]
       : []),
@@ -35,3 +43,4 @@ export default defineConfig({
     emptyOutDir: true,
   },
 });
+
