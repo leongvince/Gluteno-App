@@ -3,6 +3,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { MealPlanProvider } from "./context/MealPlanContext"; // adjust if needed
 
 // Pages
 import Home from "@/pages/Home";
@@ -12,6 +13,10 @@ import MealPlanner from "@/pages/MealPlanner";
 import Community from "@/pages/Community";
 import ProgressTracker from "@/pages/ProgressTracker";
 import NotFound from "@/pages/not-found";
+import FoodSearch from "./pages/FoodSearch";
+
+
+
 
 // Components
 import Header from "@/components/Header";
@@ -39,6 +44,7 @@ function Router() {
           <Route path="/meal-planner" component={MealPlanner} />
           <Route path="/community" component={Community} />
           <Route path="/progress-tracker" component={ProgressTracker} />
+          <Route path="/food-search" component={FoodSearch} />  {/* 👈 ADD THIS */}
           <Route component={NotFound} />
         </Switch>
       </main>
@@ -51,10 +57,13 @@ function App() {
   return (
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
-        <Router />
-        <Toaster />
-      </QueryClientProvider>
-    </ThemeProvider>
+  <MealPlanProvider>
+    <Router />
+    <Toaster />
+  </MealPlanProvider>
+</QueryClientProvider>
+</ThemeProvider>
+
   );
 }
 

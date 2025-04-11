@@ -5,6 +5,7 @@ import { format, addDays, subDays } from 'date-fns';
 import { useToast } from '@/hooks/use-toast';
 import SocialFeatures from '@/components/SocialFeatures';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useMealPlan } from "../context/MealPlanContext";
 
 interface Recipe {
   id: number;
@@ -30,6 +31,7 @@ const MealPlanner: React.FC = () => {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { mealPlan, addToMealPlan } = useMealPlan();
   
   // Format the date for display
   const formattedDate = format(selectedDate, "EEE, MMM d");
